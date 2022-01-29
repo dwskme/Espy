@@ -1,0 +1,20 @@
+
+
+
+  {
+    "name": "backend-api",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "dotenv": "^14.3.2",
+      "express": "^4.17.2",
+      "jsonwebtoken": "^8.5.1",
+      "mongoose": "^6.1.8",
+      "nodemon": "^2.0.15"
+    },
+    "scripts": {
+      "start": "nodemon index.js"
+    }
+  }
+
+  
