@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authRoute = require("./routes/auth");
-
+const userRoute = require("./routes/users");
 
 dotenv.config();
 
@@ -21,6 +21,7 @@ mongoose
 
 app.use(express.json());    //TO support json format in express
 app.use("/api/auth", authRoute); //Specifying routing address 
+app.use("/api/users", userRoute); //Specifying routing address users
 app.listen(8800, () => {
     console.log("Backend server is running!");
 });
