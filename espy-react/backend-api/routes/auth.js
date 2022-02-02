@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
                 expiresIn: "5d"
             }
         );
-
+            // Hiding Password while returning
         const {
             password,
             ...info

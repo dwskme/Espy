@@ -29,3 +29,4 @@ router.put("/:id", verify, async (req, res) => {
     res.status(403).json("You can update only your account!");
   }
 });
+module.exports = router;
