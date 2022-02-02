@@ -16,11 +16,11 @@ router.put("/:id", verify, async (req, res) => {
 
     try {
       const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
+        req.params.id, {
           $set: req.body,
-        },
-        { new: true }
+        }, {
+          new: true
+        }
       );
       res.status(200).json(updatedUser);
     } catch (err) {
@@ -46,5 +46,37 @@ router.delete("/:id", verify, async (req, res) => {
   }
 });
 
+// GET Method
+
+router.get("/find/:id", verify, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    // Hiding Password while returning
+    const {
+      password,
+      ...info
+    } = user._doc;
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET All
+
+router.get("/", verify, async (req, res) => {
+  const query = req.query.new;
+  if (req.user.isAdmin) {
+    try {
+      const users = query ? await User.find().limit(10): await User.find();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("You are not allowed to perform this request");
+  }
+});
 
 module.exports = router;
