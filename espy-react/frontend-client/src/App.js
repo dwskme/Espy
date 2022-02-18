@@ -1,15 +1,15 @@
+import React from 'react';
 import './styles/style.css';
-import LoginButton from './components/LoginButton'
-import LogoutButton from './components/LogoutButton'
-import { useAuth0 } from '@auth0/auth0-react';
-
+import Login from './components/Login';
+import Register from './components/Register';
 function App() {
   return (
-    //wrapping in fragment
-    <>
-      <LoginButton />
-      <LogoutButton />
-    </>
+    <div className='flex  items-center justify-center min-h-screen py-2 bg-gray-100'>
+
+      {/* <Login /> */}
+    <Register/>
+    
+    </div>
   );
 }
 
