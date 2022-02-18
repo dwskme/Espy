@@ -32,7 +32,7 @@ class Login extends Component {
                                     <input className='mr-1' type='checkbox' name='remember me' />
                                     Remember Me
                                 </label>
-                                <a href className= 'text-xs'> Forgot Password? </a>
+                                <a href className= 'text-xs cursor-pointer'> Forgot Password? </a>
                             </div>
                             <a href className= 'border-2 border-slate-700 rounded-full px-12 py-2 inline-block font-semibold hover:bg-slate-700 hover:text-white'>LogIn </a>
                         </div>
