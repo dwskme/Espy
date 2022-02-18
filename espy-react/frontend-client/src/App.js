@@ -6,8 +6,8 @@ function App() {
   return (
     <div className='flex  items-center justify-center min-h-screen py-2 bg-gray-100'>
 
-      {/* <Login /> */}
-    <Register/>
+      <Login />
+    {/* <Register/> */}
     
     </div>
   );
