@@ -7,7 +7,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 // TODO: 1. Make Icons Larger and Fit nicely in the NavBar
 
 
-export default function IndexPage() {
+export default function NavBar() {
     const [show, setShow] = useState(false);
     const [profile, setProfile] = useState(false);
     const [menu, setMenu] = useState(false);
@@ -63,7 +63,7 @@ export default function IndexPage() {
 
 
 
-    
+
                     {/*Mobile responsive sidebar*/}
                     <div className={show ? "w-full h-full absolute z-40  transform  translate-x-0 " : "   w-full h-full absolute z-40  transform -translate-x-full"} id="mobile-nav">
                         <div className="bg-gray-800 opacity-50 absolute h-full w-full lg:hidden" onClick={() => setShow(!show)} />
