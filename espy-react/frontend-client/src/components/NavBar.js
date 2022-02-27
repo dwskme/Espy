@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 import React, { useState } from "react";
-import {FaBars, FaUser, FaSignOutAlt, FaSearch}  from "react-icons/fa";
-import {AiOutlineMessage, AiOutlineBell} from "react-icons/ai";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-
+import {FaBars, FaUser, FaSignOutAlt, FaSearch,FaBook,FaHome ,FaSave,FaTv,FaFilm}  from "react-icons/fa";
+import {AiOutlineMessage, AiOutlineBell,AiFillLike,AiOutlineCloseCircle} from "react-icons/ai";
+import user from "../img/user.png";
+import  Home  from "../components/Home";
 // TODO: 1. Make Icons Larger and Fit nicely in the NavBar
 
 
@@ -29,33 +29,50 @@ export default function NavBar() {
                             <li className="pl-6 cursor-pointer text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                 <div className="flex items-center">
                                     <div>
-                                    Logo1
+                                    <FaHome/>
                                     </div>
-                                    <span className="ml-2">Dashboard</span>
+                                    <span className="ml-2">Home</span>
                                 </div>
                             </li>
                             <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                 <div className="flex items-center">
                                     <div>
-                                    Logo1
+                                    <AiFillLike/>
                                     </div>
-                                    <span className="ml-2">Products</span>
+                                    <span className="ml-2">Likes</span>
+                                </div>
+                            </li>
+                            <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                <div className="flex items-center">
+                                    <div>
+                                    <FaSave/>
+                                    </div>
+                                    <span className="ml-2">Saved</span>
                                 </div>
                             </li>
                             <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                 <div className="flex items-center">
                                     <div>
-                                    Logo1
+                                    <FaFilm/>
+                                    
                                     </div>
-                                    <span className="ml-2">Performance</span>
+                                    <span className="ml-2">Movies</span>
                                 </div>
                             </li>
                             <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                 <div className="flex items-center">
                                     <div>
-                                    Logo1
+                                    <FaTv/>
                                     </div>
-                                    <span className="ml-2">Deliverables</span>
+                                    <span className="ml-2">Shows</span>
+                                </div>
+                            </li>
+                            <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                <div className="flex items-center">
+                                    <div>
+                                    <FaBook/>
+                                    </div>
+                                    <span className="ml-2">Books</span>
                                 </div>
                             </li>
                         </ul>
@@ -82,33 +99,49 @@ export default function NavBar() {
                                         <li className="pl-6 cursor-pointer text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                             <div className="flex items-center">
                                                 <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    logo1
+                                                    <FaHome/>
                                                 </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Dashboard</span>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Home</span>
                                             </div>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                             <div className="flex items-center">
                                                 <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    logo1
+                                                <AiFillLike/>
                                                 </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Products</span>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Likes</span>
                                             </div>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                             <div className="flex items-center">
                                                 <div className="w-6 h-6 md:w-8 md:h-8">
-                                                    logo1
+                                                <FaSave/>
                                                 </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Performance</span>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Saved</span>
                                             </div>
                                         </li>
                                         <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                                             <div className="flex items-center">
                                                 <div className="w-6 h-6 md:w-8 md:h-8">
-                                                Logo1
+                                                <FaFilm/>
                                                 </div>
-                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Deliverables</span>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Movies</span>
+                                            </div>
+                                        </li>
+                                        <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                            <div className="flex items-center">
+                                                <div className="w-6 h-6 md:w-8 md:h-8">
+                                                <FaTv/>
+                                                </div>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Shows</span>
+                                            </div>
+                                        </li>
+                                        <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                            <div className="flex items-center">
+                                                <div className="w-6 h-6 md:w-8 md:h-8">
+                                                <FaBook/>
+                                                </div>
+                                                <span className="ml-2 xl:text-base md:text-2xl text-base">Books</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -195,7 +228,7 @@ export default function NavBar() {
                                                 )}
                                                 <div className="relative">
                                                     <img className="rounded-full h-10 w-10 object-cover" 
-                                                    src="" alt="avatar" />
+                                                    src={user} alt="avatar" />
                                                     <div className="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto" />
                                                 </div>
                                             </div>
@@ -219,9 +252,13 @@ export default function NavBar() {
 
 
                         {/* Remove class [ h-64 ] when adding a card block */}
-                        <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-                            {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-                            <div className="w-full h-full rounded border-dashed border-2 border-gray-300">{/* Place your content here */}</div>
+                        {/* <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
+                         */}
+                        <div>
+                            {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border
+                             */}
+                            <Home />
+                            {/* <div className="w-full h-full rounded border-dashed border-2 border-gray-300">Place your content here</div> */}
                         </div>
                     </div>
                 </div>
