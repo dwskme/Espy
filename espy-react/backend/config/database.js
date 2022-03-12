@@ -9,11 +9,7 @@ const connectDB = () => {
             useUnifiedTopology: true,
             // useCreateIndex: true,
         })
-        .then((data) => console.log(`DB Connection Successful: ${data.connection.host}`))	
-        .catch((err) => {
-            console.error(err);
-        })
-
+        .then((data) => console.log(`DB Connection Successful: ${data.connection.host}`));
 }
 
 module.exports = connectDB;

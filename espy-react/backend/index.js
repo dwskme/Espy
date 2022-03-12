@@ -1,4 +1,3 @@
-const express = require("express");
 const app = require("./app");
 const connectDB = require("./config/database");	
 const dotenv = require("dotenv");
@@ -14,6 +13,16 @@ connectDB();
 
 
 // Defining a port for the server to run.
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log(`Backend server is running on http://localhost:${process.env.PORT}`)
+});
+
+
+// Unhandled Promise Rejections
+process.on("unhandledRejection", err=>{
+    console.log(`Error: ${err.message}`);
+    console.log(`Shutting Down server due to Unhandled Promise Rejection`);
+    server.close(()=>{
+        process.exit(1);
+    });
 });
