@@ -1,36 +1,19 @@
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
+const app = require("./app");
+const connectDB = require("./config/database");	
 const dotenv = require("dotenv");
-const authRoute = require("./routes/auth");
-const userRoute = require("./routes/users");
-const movieRoute = require("./routes/movies");
+
 
 
 // Config
 dotenv.config({path: "backend/config/config.env"});
 
-mongoose
-    .connect(process.env.MONGO_URL, {
-        // Latest moongose support so no neew to write these below
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        // useCreateIndex: true,
-    })
-    .then(() => console.log("DB Connection Successful"))
-    .catch((err) => {
-        console.error(err);
-    });
-
-app.use(express.json());    //TO support json format in express
-app.use("/api/auth", authRoute); //Specifying routing address 
-app.use("/api/users", userRoute); //Specifying routing address users
-app.use("/api/movies", movieRoute); //Specifying routing address movies
+// Connect to Database
+connectDB();
 
 
 
-
-// 
+// Defining a port for the server to run.
 app.listen(process.env.PORT, () => {
-    console.log("Backend server is running on http://localhost:${process.env.PORT}");
+    console.log(`Backend server is running on http://localhost:${process.env.PORT}`)
 });
