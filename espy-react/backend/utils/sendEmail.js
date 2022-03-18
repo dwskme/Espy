@@ -6,7 +6,7 @@ const sendEmail = async(options) =>{
         service: SMTP_SERVICE,	
         auth:{
             user:process.env.SMTP_MAIL,
-            password:process.env.SMTP_PASSWORD,
+            pass:process.env.SMTP_PASSWORD,
         },
     });
 
