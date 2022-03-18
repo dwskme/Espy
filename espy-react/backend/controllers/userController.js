@@ -167,12 +167,39 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     };
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-        new:true,
+        new:true, 
         runValidators:true,
         useFindAndModify:false,
     });
-    
-res.status(200).json({
-    success:true,
+
+    res.status(200).json({
+        success:true,
+    });
 });
+
+
+// Get all Users (Admin)
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+
+    
+    const users = await User.find();
+
+    res.status(200).json({
+        success:true,
+        users,
+    });
+});
+
+// Get single Users (Admin)
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findByID(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
+    }
+
+    res.status(200).json({
+        success:true,
+        user,
+    });
 });
