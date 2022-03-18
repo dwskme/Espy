@@ -178,6 +178,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+// Admin Controllers
+
 // Get all Users (Admin)
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
@@ -201,5 +203,44 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success:true,
         user,
+    });
+});
+
+// Update User Role (Admin)
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+        role:req.body.role,
+    };
+    
+
+    const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+        new:true, 
+        runValidators:true,
+        useFindAndModify:false,
+    });
+
+    if(!user){
+        return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
+    }
+
+    res.status(200).json({
+        success:true,
+    });
+});
+
+// Delete User (Admin)
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+    if(!user){
+        return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
+    }
+
+    await user.remove();
+
+    res.status(200).json({
+        success:true,
     });
 });
