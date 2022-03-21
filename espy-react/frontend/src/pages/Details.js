@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { MOVIE_URL, API_KEY, IMAGE_BASE_URL } from '../config';
+import { API_KEY } from '../config';
 
 
 const Details = () => {

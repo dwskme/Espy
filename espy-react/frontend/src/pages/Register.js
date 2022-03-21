@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FaRegEnvelope, FaUser } from "react-icons/fa";
-import { MdLockOutline } from "react-icons/md";
+// import { FaRegEnvelope, FaUser } from "react-icons/fa";
+// import { MdLockOutline } from "react-icons/md";
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';

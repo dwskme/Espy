@@ -2,31 +2,25 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { POPULAR_BASE_URL, POPULAR_SHOWS_URL } from '../config';
-import Nav from '../components/layout/nav';
+import SideBar from '../components/layout/SideBar';
 import $ from 'jquery';
 import Trending from '../components/layout/Trending';
 import NavBar from '../components/layout/NavBar';
 
 export default function Home() {
-
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
-
     const [isLoading, setLoading] = useState(false)
-
     useEffect(() => {
         setLoading(true);
         axios.get(POPULAR_BASE_URL).then(function (result) {
             // console.log(result.data.results);
             setMovie(result.data.results);
         }).finally(() => setLoading(false), console.log(movie));
-
         axios.get(POPULAR_SHOWS_URL).then(function (result) {
             console.log(result.data.results);
             setShows(result.data.results);
         }).finally(() => setLoading(false), console.log(movie));
-
-
     }, []);
 
     $('.carousel-item').eq(7).addClass('active')
@@ -35,7 +29,7 @@ export default function Home() {
             <NavBar></NavBar>
             <div className='d-flex'>
                 <div className='nav-wrapper'>
-                    <Nav tab="home"></Nav>
+                    <SideBar tab="home"></SideBar>
                 </div>
 
 

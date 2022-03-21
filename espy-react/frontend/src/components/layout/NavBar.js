@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import axios from 'axios';
 import { SEARCH_BASE_URL } from '../../config';
-import SearchCard from '../features/SearchCard';
+import SearchCard from './SearchCard';
 import $ from 'jquery';
 import '../../styles/style.css';
 

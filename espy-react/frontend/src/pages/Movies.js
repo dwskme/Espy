@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Card from '../components/layout/Card';
 import { POPULAR_BASE_URL } from '../config';
-import Nav from '../components/layout/nav';
+import SideBar from '../components/layout/SideBar';
 import $ from 'jquery';
 import { useParams } from 'react-router';
 import NavBar from '../components/layout/NavBar';
@@ -29,7 +29,7 @@ export default function Movies() {
 
             <div className='d-flex'>
                 <div className='nav-wrapper'>
-                    <Nav tab='movies'></Nav>
+                    <SideBar tab='movies'></SideBar>
                 </div>
                 <div>
                     <div className='container px-5'>
