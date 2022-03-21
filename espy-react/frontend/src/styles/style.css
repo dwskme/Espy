@@ -1,0 +1,51 @@
+.info {
+    background: rgba(20, 20, 20, 0.7);
+    border-radius: 10px;
+  }
+  
+  .search-seg-box {
+    width: 30ch;
+    position: absolute;
+    top: 8ch;
+    right: 14ch;
+    z-index: 1;
+    font-size: 0.9em;
+  }
+  
+  .search-image {
+    height: 7ch;
+    width: 5ch;
+    border-radius: 4px;
+  }
+  
+  .item-link {
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  
+  .i-link:hover {
+    background: rgb(211, 211, 211);
+    /* color: ; */
+  }
+  
+  .backdrop-image {
+    width: 100%;
+    height: 100vh;
+    filter: blur(10px);
+    background: none;
+    border: none;
+  }
+  
+  .desc-info {
+    position: absolute;
+    top: 20ch;
+    left: 40ch;
+    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    width: 50%;
+  }
+  .desc-info img {
+    height: 40ch;
+  }
+  

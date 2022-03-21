@@ -1,0 +1,28 @@
+.fake-box {
+  background: #000;
+  border-radius: 20px;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+}
+
+.info-box {
+  border-radius: 20px;
+  /* opacity: 0.6; */
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+}
+
+.movie-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

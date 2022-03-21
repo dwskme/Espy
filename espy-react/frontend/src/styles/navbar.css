@@ -1,0 +1,8 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  /* background-color: aquamarine; */
+  z-index: 999;
+}
