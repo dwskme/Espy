@@ -1,13 +1,12 @@
 import React from 'react';
-import placeholder from "../img/placeholder.png";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Card from '../components/Card';
+import Card from '../components/layout/Card';
 import { POPULAR_BASE_URL } from '../config';
-import Nav from '../components/nav';
+import Nav from '../components/layout/nav';
 import $ from 'jquery';
 import { useParams } from 'react-router';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/layout/NavBar';
 
 export default function Movies() {
     const tabName = useParams().tabName;
