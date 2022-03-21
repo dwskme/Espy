@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { SEARCH_BASE_URL } from '../config';
-import SearchCard from './SearchCard';
+import { SEARCH_BASE_URL } from '../../config';
+import SearchCard from '../features/SearchCard';
 import $ from 'jquery';
-import '../styles/style.css';
+import '../../styles/style.css';
 
 
 

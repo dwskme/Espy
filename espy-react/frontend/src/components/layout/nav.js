@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/navbar.css';
+import '../../styles/navbar.css';
 import { Link } from 'react-router-dom';
 import { FaBars, FaUser, FaSignOutAlt, FaSearch, FaBook, FaHome, FaSave, FaTv, FaFilm } from "react-icons/fa";
 import { AiOutlineMessage, AiOutlineBell, AiFillLike, AiOutlineCloseCircle } from "react-icons/ai";

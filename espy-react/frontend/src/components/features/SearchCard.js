@@ -1,5 +1,4 @@
 import React from 'react'
-import { IMAGE_BASE_URL } from '../config';
 import { Link } from 'react-router-dom';
 
 const SearchCard = (props) => {
