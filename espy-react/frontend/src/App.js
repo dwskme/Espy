@@ -1,10 +1,9 @@
 import React from 'react';
 import './styles/style.css';
-import Login from './components/Login';
-import Register from './components/Register';
-import NavBar from './components/NavBar';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './pages/Home';
 import Movies from './pages/Movies';
 import Shows from './pages/Shows';
 import Details from './pages/Details';
