@@ -45,13 +45,13 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     }).select("+password");
 
     if (!user) {
-        return next(new ErrorHandler("Invalid email or password", 401));
+        return next(new ErrorHandler("Invalid email or password", 401), res.json({success:false, message:"Invalid email or password"}));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
-        return next(new ErrorHandler("Invalid email or password", 401));
+        return next(new ErrorHandler("Invalid email or password", 401), res.json({success:false, message:"Invalid email or password"}));
     }
     sendToken(user,200,res);
 });
@@ -133,7 +133,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Detail
 exports.getUserDetails  = catchAsyncErrors(async (req, res, next) => {
-
+    // console.log()
     const user = await User.findById(req.user.id);
     res.status(200).json({
         success:true,

@@ -40,6 +40,9 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+
+    watched: {type: [], default: ["List"]},
+    watchList: {type: []}
 });
 
 userSchema.pre("save", async function (next) {
