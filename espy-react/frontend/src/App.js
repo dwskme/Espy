@@ -7,9 +7,14 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import Shows from './pages/Shows';
 import Details from './pages/Details';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Profile from './pages/Profile';
+
 function App() {
   return (
     <div className='main'>
+      <ToastContainer></ToastContainer>
       <Router>
         <Routes>
           <Route path='/' element={<Home></Home>}></Route>
@@ -18,6 +23,7 @@ function App() {
           <Route path='/movies' element={<Movies></Movies>}></Route>
           <Route path='/shows' element={<Shows></Shows>}></Route>
           <Route path='/details/:id' element={<Details></Details>}></Route>
+          <Route path='/profile' element={<Profile></Profile>}></Route>
         </Routes>
       </Router>
     </div>

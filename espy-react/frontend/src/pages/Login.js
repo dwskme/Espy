@@ -1,8 +1,33 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import {toast} from 'react-toastify';
+import $ from 'jquery'
+
 const Login = () => {
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
+    // const [remember, setRemember] = useState("");
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    //    const remember =  document.getElementById('check').checked;
+        axios.post('/api/v1/login', {email, password }).then(function(result) {
+            console.log(result.data);
+            if(result.data.success){
+                localStorage.setItem('token', result.data.token);
+                toast.success("Logged In Successfully", {position: toast.POSITION_TOP_RIGHT})
+                navigate('/');
+            }else{
+                toast.error(result.data.message, {position: toast.POSITION.TOP_RIGHT})}
+        });
+    }
+
     return (
         <>
             <section className="vh-100 d-flex">
@@ -21,29 +46,29 @@ const Login = () => {
                                 <div className="form-outline mb-4">
                                     <label className="form-label" for="form3Example3">Email address</label>
 
-                                    <input type="email" id="form3Example3" className="form-control form-control-lg"
+                                    <input onChange={(e)=>setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter a valid email address" />
                                 </div>
 
                                 <div className="form-outline mb-3">
                                     <label className="form-label" for="form3Example4">Password</label>
 
-                                    <input type="password" id="form3Example4" className="form-control form-control-lg"
+                                    <input onChange={(e)=>setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
                                         placeholder="Enter password" />
                                 </div>
 
-                                <div className="d-flex justify-content-between align-items-center">
+                                {/* <div className="d-flex justify-content-between align-items-center">
                                     <div className="form-check mb-0">
-                                        <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+                                        <input className="form-check-input me-2" type="checkbox" value="true" id="check" />
                                         <label className="form-check-label" for="form2Example3">
                                             Remember me
                                         </label>
                                     </div>
                                     <a href="#!" className="text-body">Forgot password?</a>
-                                </div>
+                                </div> */}
 
                                 <div className="text-center text-lg-start mt-4 pt-2">
-                                    <button type="button" className="btn btn-primary btn-lg"
+                                    <button onClick={handleSubmit} type="button" className="btn btn-primary btn-lg"
                                     >Login</button>
                                     <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <Link to={'/register'}
                                         className="link-danger">Register</Link></p>

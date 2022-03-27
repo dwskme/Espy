@@ -25,6 +25,10 @@ const Details = () => {
                         <div className='desc-info d-flex text-light p-5'>
                             <img className='img img-thumbnail' src={`http://image.tmdb.org/t/p/w342/${data?.poster_path}`} alt="poster" />
                             <div>
+                                <div className='d-flex'>
+                                    <button className='btn btn-sm btn-primary text-light fw-bold mx-2'>Watch Later</button>
+                                    <button className='btn btn-sm btn-success text-light fw-bold mx-2'>Mark Watched</button>
+                                </div>
                                 <p style={{ fontSize: "2em" }} className='m-0 fw-bold px-3 my-1'>{data?.title}</p>
                                 <p className='m-0 fw-bold px-3 my-1'>{data?.release_date}</p>
 

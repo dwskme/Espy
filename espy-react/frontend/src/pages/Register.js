@@ -5,19 +5,28 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {toast} from 'react-toastify';
+
 
 const Register = () => {
 
     const navigate = useNavigate();
-    const [fullName, setName] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(fullName, email, password);
-        axios.post('http://localhost:4000/api/v1/register', { fullName, email, password }).then(function(result) {
-            console.log(result);
+        console.log(name, email, password);
+        // console.log(fullName, email,);
+        axios.post('/api/v1/register', { name, email, password }).then(function(result) {
+            console.log(result.data);
+            localStorage.setItem('token', result.data.token);
+            if(result.data.success){
+                toast.success("Registered Successfully.", {position: toast.POSITION_TOP_RIGHT})
+                navigate('/');
+            }else{
+                toast.error(result.data.message, {position: toast.POSITION.TOP_RIGHT})            }
         });
     }
 
@@ -37,7 +46,7 @@ const Register = () => {
                                 <div className="form-outline mb-4">
                                     <label className="form-label" for="form3Example3">Full Name</label>
 
-                                    <input onChange={(e)=>e.target.value} type="text" id="form3Example3" className="form-control form-control-lg"
+                                    <input onChange={(e)=>setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter your name" />
                                 </div>
 
@@ -45,14 +54,14 @@ const Register = () => {
                                 <div className="form-outline mb-4">
                                     <label className="form-label" for="form3Example3">Email address</label>
 
-                                    <input onChange={(e)=>e.target.value} type="email" id="form3Example3" className="form-control form-control-lg"
+                                    <input onChange={(e)=>setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter a valid email address" />
                                 </div>
 
                                 <div className="form-outline mb-3">
                                     <label className="form-label" for="form3Example4">Password</label>
 
-                                    <input onChange={(e)=>e.target.value} type="password" id="form3Example4" className="form-control form-control-lg"
+                                    <input onChange={(e)=>setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
                                         placeholder="Enter password" />
                                 </div>
 

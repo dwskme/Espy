@@ -38,12 +38,12 @@
   
   .desc-info {
     position: absolute;
-    top: 20ch;
-    left: 40ch;
+    top: 20vh;
+    left: 22vw;
     background-color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 3px;
-    width: 50%;
+    max-width: 50%;
   }
   .desc-info img {
     height: 40ch;
