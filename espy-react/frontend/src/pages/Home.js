@@ -8,6 +8,9 @@ import Trending from '../components/layout/Trending';
 import NavBar from '../components/layout/NavBar';
 
 export default function Home() {
+
+    const token = localStorage.getItem('token');
+
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
     const [isLoading, setLoading] = useState(false)

@@ -8,42 +8,42 @@ import $ from 'jquery';
 const Nav = (props) => {
 
     $(`#${props.tab}`).addClass('active');
+    // $(`#rated`).addClass('active');
+
 
     return (
         <div className="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar" style={{ width: "280px" }}>
             {/* <a href="#" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <span className="fs-4">Espy</span>
             </a> */}
-            <hr />
             <ul className="nav nav-pills flex-column mb-auto">
                 <li className="nav-item">
-                    <Link id='home' to={'/'} className="nav-link link-dark" aria-current="page">
+                    <a id='home' href={'/'} className="nav-link link-dark">
                         <span><FaHome /> Home</span>
-                    </Link>
+                    </a>
                 </li>
                 <li>
-                    <a href="#" className="nav-link link-dark">
-                        <span><AiFillLike /> Likes</span>
+                    <a id='rated' href={"/rated-movies"} className="nav-link link-dark">
+                        <span><AiFillLike /> My Ratings</span>
 
                     </a>
                 </li>
                 <li>
-                    <a href="#" className="nav-link link-dark">
-                        <span><FaSave /> Saved</span>
-
+                    <a id="later" href={"/watch-later"} className="nav-link link-dark">
+                        <span><FaSave /> Watch Later</span>
                     </a>
                 </li>
                 <li>
-                    <Link id='movies' to={'/movies'} className="nav-link link-dark">
+                    <a id='movies' href={'/movies'} className="nav-link link-dark">
                         <span><FaFilm /> Movies</span>
-                    </Link>
+                    </a>
                 </li>
                 <li>
-                    <Link id="shows" to={'/shows'} className="nav-link link-dark">
+                    <a id="shows" href={'/shows'} className="nav-link link-dark">
 
                         <span><FaTv /> Shows</span>
 
-                    </Link>
+                    </a>
                 </li>
                 <li>
                     <a href="#" className="nav-link link-dark">

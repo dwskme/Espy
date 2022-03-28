@@ -5,28 +5,32 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const Register = () => {
 
     const navigate = useNavigate();
     const [name, setName] = useState('');
+    const [gender, setGender] = useState('Male');
+    const [age, setAge] = useState('');
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(name, email, password);
+        console.log(name, email, password, gender, age);
         // console.log(fullName, email,);
-        axios.post('/api/v1/register', { name, email, password }).then(function(result) {
+        axios.post('/api/v1/register', { name, email, password, gender, age }).then(function (result) {
             console.log(result.data);
             localStorage.setItem('token', result.data.token);
-            if(result.data.success){
-                toast.success("Registered Successfully.", {position: toast.POSITION_TOP_RIGHT})
-                navigate('/');
-            }else{
-                toast.error(result.data.message, {position: toast.POSITION.TOP_RIGHT})            }
+            if (result.data.success) {
+                toast.success("Registered Successfully.", { position: toast.POSITION_TOP_RIGHT })
+                window.location.href = '/';
+            } else {
+                toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
+            }
         });
     }
 
@@ -46,22 +50,39 @@ const Register = () => {
                                 <div className="form-outline mb-4">
                                     <label className="form-label" for="form3Example3">Full Name</label>
 
-                                    <input onChange={(e)=>setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-lg"
+                                    <input onChange={(e) => setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter your name" />
+                                </div>
+
+                                <div className='row'>
+                                    <div className='form-outline mb-4 col-md-6'>
+                                        <label className="form-label" for="form3Example3">Gender</label>
+                                        <select onChange={(e) => { setGender(e.target.value) }} class="form-select form-select-lg" aria-label="Default select example">
+                                            <option selected value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="form-outline mb-4 col-md-6">
+                                        <label className="form-label" for="form3Example3">Age</label>
+
+                                        <input onChange={(e) => setAge(e.target.value)} type="number" id="form3Example3" className="form-control form-control-lg"
+                                            placeholder="Enter Age" />
+                                    </div>
                                 </div>
 
 
                                 <div className="form-outline mb-4">
                                     <label className="form-label" for="form3Example3">Email address</label>
 
-                                    <input onChange={(e)=>setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-lg"
+                                    <input onChange={(e) => setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter a valid email address" />
                                 </div>
 
                                 <div className="form-outline mb-3">
                                     <label className="form-label" for="form3Example4">Password</label>
 
-                                    <input onChange={(e)=>setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
+                                    <input onChange={(e) => setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
                                         placeholder="Enter password" />
                                 </div>
 
@@ -69,7 +90,7 @@ const Register = () => {
                                 <div className="text-center text-lg-start mt-4 pt-2">
                                     <button onClick={handleSubmit} type="button" className="btn btn-primary btn-lg"
                                     >Register</button>
-                                    <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <Link to={'/login'}
+                                    <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <Link to={'/'}
                                         className="link-danger">Login</Link></p>
                                 </div>
 

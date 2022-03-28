@@ -30,6 +30,12 @@ const MovieCard = (props) => {
                             <p className='m-0 text-light mx-2 fw-bold'>{props.title}</p>
                             <p className='m-0 text-light mx-2 fw-bold'>{props.name}</p>
                             <p className='m-0 text-light mx-2'>Rating: {props.rating}⭐</p>
+                            {
+                                props.userRating !== undefined ?
+                                    <p className='m-0 text-light mx-2'>Your Rating: {props.userRating}⭐</p>
+                                    :
+                                    <></>
+                            }
                             <p className='movie-description m-0 text-light mx-2 mt-5' style={{ fontSize: "0.85em" }}>{props.overview}</p>
                         </div>
                     </div>

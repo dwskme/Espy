@@ -45,8 +45,8 @@ export default function Movies() {
                                                 {
                                                     movie?.map((val, index) => {
                                                         return (
-                                                            <div className='col-md-3 py-5'>
-                                                                <div className="flex flex-wrap -m-4">
+                                                            <div className='col-md-3'>
+                                                                <div className="flex flex-wrap m-4">
                                                                     <Card id={val.id} name={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
                                                                 </div>
                                                             </div>
