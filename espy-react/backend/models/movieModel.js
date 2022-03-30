@@ -3,13 +3,15 @@ const mongoose= require("mongoose");
 
 const movieSchema = new mongoose.Schema({
 
-    name:{
+    id:{
         type:String,
-        required:[true,"Please Enter Movie Name"]
+        required:true
     },
-    description:{
-        type:String,
-        required:[true,"Please Enter Movie Description"]
+    rating_count:{
+        type:Number,
+        required:true
     }
 
 })
+
+module.exports = mongoose.model('Movie', movieSchema);

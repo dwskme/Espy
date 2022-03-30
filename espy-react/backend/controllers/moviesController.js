@@ -2,7 +2,6 @@ const Movies = require('../models/movieModel');
 const User = require("../models/userModel");
 
 
-
 // Create Movies -- only for admin
 
 exports.addToWatchList = async (req, res, next) => {
@@ -89,6 +88,7 @@ exports.rateMovie = async (req, res, next) => {
     const rating = req.body.rating;
     var movies = req.user.ratedList;
     var watchList = req.user.watchList;
+    
     // checking if movie already exists in the array
     movies.push({ movie: movie, rating: rating })
     const user = await User.findByIdAndUpdate(req.user.id, { ratedList: movies }, {
@@ -96,6 +96,17 @@ exports.rateMovie = async (req, res, next) => {
         runValidators: true,
         useFindAndModify: false,
     });
+
+    const movieR = Movies.findOne({id: movie.id}).then(function(result){
+        if(!result){
+            const newMovie = Movies.create({id:movie.id, rating_count: 1})
+            
+        }else{
+          var count = result.rating_count;
+          count = count+ 1;
+          Movies.findOneAndUpdate({id: result.id}, {rating_count: count})
+        }
+    })
 
     // remove from watch later list
     for (var i = 0; i < watchList.length; i++) {

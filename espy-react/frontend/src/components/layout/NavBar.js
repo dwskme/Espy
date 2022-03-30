@@ -5,13 +5,11 @@ import SearchCard from './SearchCard';
 import $ from 'jquery';
 import '../../styles/style.css';
 import { toast } from 'react-toastify';
-import { parseJwt } from '../../utils/utils';
 import { UserContext } from '../../utils/userContext';
 
 
 const NavBar = () => {
 
-    const token = parseJwt(localStorage.getItem('token'));
     const [user, setUser] = useContext(UserContext);
 
     // console.log("User ", user)
@@ -61,6 +59,7 @@ const NavBar = () => {
                         {/* <li><a className="dropdown-item" href="#">New project...</a></li> */}
                         {/* <li><a className="dropdown-item" href="#">Settings</a></li> */}
                         <li><a className="dropdown-item" href="/profile">Profile</a></li>
+                        <li><a className="dropdown-item" href="/admin/dashboard">Admin Panel</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><button onClick={logout} className="dropdown-item" href="#">Sign out</button></li>
                     </ul>

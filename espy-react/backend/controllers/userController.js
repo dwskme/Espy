@@ -145,6 +145,7 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+
 // Update User Password
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
@@ -223,12 +224,28 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-// Update User Role (Admin)
+// Search single User (Admin)
+exports.searchUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findOne({email: req.params.query});
+
+    if (!user) {
+        return next(new ErrorHandler(`No user found with ${req.params.query}`, 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        user,
+    });
+});
+
+// Update User (Admin)
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
+        age: req.body.age,
+        gender: req.body.gender,
         role: req.body.role,
     };
 
@@ -250,7 +267,7 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 
 // Delete User (Admin)
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({_id:req.params.id, role: "user"});
     if (!user) {
         return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
     }
