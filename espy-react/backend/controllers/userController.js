@@ -139,7 +139,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
 // Get User Detail
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
-    // console.log()
     const user = await User.findById(req.user.id);
     res.status(200).json({
         success: true,
@@ -183,8 +182,6 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     if (req.body.gender !== "" || req.body.gender !== undefined) {
         newUserData.gender = req.body.gender
     }
-
-    console.log(newUserData);
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
