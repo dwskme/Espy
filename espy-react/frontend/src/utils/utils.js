@@ -1,7 +1,5 @@
 import { toast } from "react-toastify";
 
-import { useNavigate } from "react-router";
-
 export const parseJwt = (token) => {
     if (!token) { return; }
     const base64Url = token.split('.')[1];

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Card from '../components/layout/Card';
-import { POPULAR_BASE_URL } from '../config';
+import { POPULAR_MOVIE_URL } from '../config';
 import SideBar from '../components/layout/SideBar';
 import $ from 'jquery';
 import { useParams } from 'react-router';
@@ -15,7 +15,7 @@ export default function Movies() {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(POPULAR_BASE_URL).then(function (result) {
+        axios.get(POPULAR_MOVIE_URL).then(function (result) {
             console.log(result.data.results);
             setMovie(result.data.results);
         }).finally(() => setLoading(false), console.log(movie));

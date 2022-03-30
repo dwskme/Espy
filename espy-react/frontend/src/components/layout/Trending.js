@@ -15,7 +15,6 @@ const Trending = (props) => {
                                 return (
                                     <div className='col-md-3'>
                                         <div className="flex flex-wrap m-4">
-                                            {/* <MovieCard name={val?.title} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`} title={val?.title} genre={val?.genres[0]?.name} summary={val?.overview} /> */}
                                             {<Card id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>}
                                         </div>
                                     </div>

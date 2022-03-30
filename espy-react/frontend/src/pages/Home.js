@@ -1,22 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { POPULAR_BASE_URL, POPULAR_SHOWS_URL } from '../config';
+import { POPULAR_MOVIE_URL, POPULAR_SHOWS_URL } from '../config';
 import SideBar from '../components/layout/SideBar';
 import $ from 'jquery';
 import Trending from '../components/layout/Trending';
 import NavBar from '../components/layout/NavBar';
 
 export default function Home() {
-
-    const token = localStorage.getItem('token');
-
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
     const [isLoading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true);
-        axios.get(POPULAR_BASE_URL).then(function (result) {
+        axios.get(POPULAR_MOVIE_URL).then(function (result) {
             // console.log(result.data.results);
             setMovie(result.data.results);
         }).finally(() => setLoading(false), console.log(movie));
@@ -44,7 +41,7 @@ export default function Home() {
                                 movie?.map((val, index) => {
                                     return (
                                         <div className='carousel-item bg-secondary'>
-                                            <img style={{ height: "65ch", width: "100%", objectFit: "cover" }} src={`http://image.tmdb.org/t/p/w1280/${val?.backdrop_path}`} alt="" />
+                                            <img style={{ height: "65ch", width: "100%", objectFit: "cover" }} src={`http://image.tmdb.org/t/p/w1280/${val?.backdrop_path}`} alt="Poster-Image" />
                                             <div className='carousel-caption d-block'>
                                                 <div className='info px-3 py-3'>
                                                     <p className='fw-bold' style={{ fontSize: "3em" }}>{val.title}</p>

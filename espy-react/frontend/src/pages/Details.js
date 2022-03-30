@@ -11,12 +11,10 @@ const Details = () => {
     const id = useParams().id
 
     const [user, setUser] = useContext(UserContext)
-
     const [rating, setRating] = useState('1');
     const [rate, setRate] = useState();
     const watchList = user?.watchList;
     const ratedList = user?.ratedList;
-
     const [data, setData] = useState();
 
 
@@ -32,9 +30,18 @@ const Details = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&external_source=imdb_id`).then(function (result) {
+        
+        if (data?.hasOwnProperty('backdrop_path')){
+            axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`)
+            .then(function (result) {
             setData(result.data);
         })
+        }else{
+            axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
+            .then(function (result) {
+            setData(result.data);
+        })
+        }
     }, [])
 
 
@@ -95,8 +102,9 @@ const Details = () => {
         <>
             <NavBar></NavBar>
             <div className='container-fluid p-0'>
-                <div className='d-flex align-items-center backdrop-div' style={{ height: "80vh", backgroundImage: `url('http://image.tmdb.org/t/p/w1280/${data?.backdrop_path}')`, backgroundPosition: 'center', backgroundSize: "cover" }}>
-                    {/* <img className='backdrop-image' src={`http://image.tmdb.org/t/p/w1280/${data?.backdrop_path}`} alt="backdrop" /> */}
+                <div className='d-flex align-items-center backdrop-div' 
+                style={{ height: "80vh", backgroundImage: `url('http://image.tmdb.org/t/p/w1280/${data?.backdrop_path}')`, backgroundPosition: 'center', backgroundSize: "cover" }}>
+                    {console.log(data)}
                     <div className=''>
                         <div className='container desc-info d-flex text-light py-5 px-4 mx-auto col-10'>
                             <img className='img img-thumbnail' src={`http://image.tmdb.org/t/p/w342/${data?.poster_path}`} alt="poster" />
