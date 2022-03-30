@@ -5,7 +5,7 @@ import { API_KEY } from '../config';
 import { toast } from 'react-toastify';
 import { UserContext } from '../utils/userContext';
 import NavBar from '../components/layout/NavBar';
-
+import { SEARCH_MULTI_URL } from '../config';
 
 const Details = () => {
     const id = useParams().id
@@ -30,18 +30,8 @@ const Details = () => {
     }
 
     useEffect(() => {
-        
-        if (data?.hasOwnProperty('backdrop_path')){
-            axios.get(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`)
-            .then(function (result) {
-            setData(result.data);
-        })
-        }else{
-            axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
-            .then(function (result) {
-            setData(result.data);
-        })
-        }
+        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
+            .then(function (result) {setData(result.data);})        
     }, [])
 
 

@@ -12,13 +12,10 @@ const NavBar = () => {
 
     const [user, setUser] = useContext(UserContext);
 
-    // console.log("User ", user)
-
     const [search, setSearch] = useState();
 
     const searchMovies = (query) => {
         axios.get(SEARCH_MULTI_URL + query).then(function (result) {
-            console.log(result.data.results);
             setSearch(result.data.results.slice(0, 5));
             $('.search-seg-box').addClass('py-2 px-2 border');
         });
