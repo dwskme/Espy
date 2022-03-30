@@ -1,18 +1,21 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import './styles/style.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import Shows from './pages/Shows';
 import Details from './pages/Details';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Profile from './pages/Profile';
 import { UserProvider } from './utils/userContext';
 import WatchLater from './pages/WatchLater';
 import RatedMovies from './pages/RatedMovies';
+import Dashboard from './pages/admin/Dashboard';
+import UserManagement from './pages/admin/UserManagement';
 
 function App() {
   // localStorage.clear();
@@ -23,11 +26,11 @@ function App() {
         <ToastContainer></ToastContainer>
         <Router>
           <Routes>
-
             {
-              // localStorage.clear()
+              //  If the token is Null then it means there is no user currently logged in so it will redirect to Login/ Register page else it will take to home page..
               token !== null ?
                 <>
+                  <Route path='/admin/dashboard' element={<UserManagement></UserManagement>}></Route>
                   <Route path='/' element={<Home></Home>}></Route>
                   <Route path='/watch-later' element={<WatchLater></WatchLater>}></Route>
                   <Route path='/rated-movies' element={<RatedMovies></RatedMovies>}></Route>
