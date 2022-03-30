@@ -1,28 +1,15 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import $ from 'jquery'
-
+import  placeholder1  from "../img/placeholder1.png";
 const Login = () => {
-    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(  (email.length===0 && (password.length===0) ))
-        {
-            toast.error("Empty Feilds not allowed");
-        }
-        else if (email.length === 0 ){
-            toast.error("Empty Email Feild");
-        }
-        else if (password.length === 0 ){
-            toast.error("Empty Password Feild Feild");
-        }else{}
         axios.post('/api/v1/login', { email, password }).then(function (result) {
             console.log(result.data);
             if (result.data.success) {
@@ -41,7 +28,7 @@ const Login = () => {
                 <div className="container-fluid h-custom">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-md-9 col-lg-6 col-xl-5">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" className="img-fluid"
+                            <img src={placeholder1} className="img-fluid"
                                 alt="" />
                         </div>
                         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
