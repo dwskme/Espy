@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { SEARCH_BASE_URL } from '../../config';
+import { SEARCH_BASE_URL, SEARCH_MULTI_URL } from '../../config';
 import SearchCard from './SearchCard';
 import $ from 'jquery';
 import '../../styles/style.css';
@@ -17,7 +17,7 @@ const NavBar = () => {
     const [search, setSearch] = useState();
 
     const searchMovies = (query) => {
-        axios.get(SEARCH_BASE_URL + query).then(function (result) {
+        axios.get(SEARCH_MULTI_URL + query).then(function (result) {
             console.log(result.data.results);
             setSearch(result.data.results.slice(0, 5));
             $('.search-seg-box').addClass('py-2 px-2 border');
