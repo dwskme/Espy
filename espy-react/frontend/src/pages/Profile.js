@@ -137,7 +137,7 @@ const Profile = () => {
                             <div className="modal-body">
                               <form>
                                 <div className="form-outline mb-4">
-                                  <label className="form-label" for="form3Example3">Full Name</label>
+                                  <label className="form-label" htmlFor="form3Example3">Full Name</label>
 
                                   <input onChange={(e) => setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-sm"
                                     placeholder={user?.name} />
@@ -145,15 +145,15 @@ const Profile = () => {
 
                                 <div className='row'>
                                   <div className='form-outline mb-4 col-md-6'>
-                                    <label className="form-label" for="form3Example3">Gender</label>
-                                    <select onChange={(e) => { setGender(e.target.value) }} class="form-select form-select-sm" aria-label="Default select example">
+                                    <label className="form-label" htmlFor="form3Example3">Gender</label>
+                                    <select onChange={(e) => { setGender(e.target.value) }} className="form-select form-select-sm" aria-label="Default select example">
                                       <option selected={user?.gender === "Male" ? "true" : "false"} value="Male">Male</option>
                                       <option selected={user?.gender === "Female" ? "true" : "false"} value="Female">Female</option>
                                     </select>
                                   </div>
 
                                   <div className="form-outline mb-4 col-md-6">
-                                    <label className="form-label" for="form3Example3">Age</label>
+                                    <label className="form-label" htmlFor="form3Example3">Age</label>
 
                                     <input onChange={(e) => setAge(e.target.value)} type="number" id="form3Example3" min='1' className="form-control form-control-sm"
                                       placeholder={user?.age} />
@@ -162,7 +162,7 @@ const Profile = () => {
 
 
                                 <div className="form-outline mb-4">
-                                  <label className="form-label" for="form3Example3">Email address</label>
+                                  <label className="form-label" htmlFor="form3Example3">Email address</label>
 
                                   <input onChange={(e) => setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-sm"
                                     placeholder={user?.email} />
@@ -195,7 +195,7 @@ const Profile = () => {
                             <div className="modal-body">
                               <form>
                                 <div className="form-outline mb-4">
-                                  <label className="form-label" for="form3Example3">Old Password</label>
+                                  <label className="form-label" htmlFor="form3Example3">Old Password</label>
 
                                   <input onChange={(e) => setOldPass(e.target.value)} type="text" id="form3Example3" autoComplete='off' className="form-control form-control-sm"
                                     placeholder="Enter your old password" />
@@ -203,14 +203,14 @@ const Profile = () => {
 
 
                                 <div className="form-outline mb-4">
-                                  <label className="form-label" for="form3Example3">New Password</label>
+                                  <label className="form-label" htmlFor="form3Example3">New Password</label>
 
                                   <input onChange={(e) => setNewPass(e.target.value)} type="email" id="form3Example3" autoComplete='off' className="form-control form-control-sm"
                                     placeholder="Enter new password" />
                                 </div>
 
                                 <div className="form-outline mb-4">
-                                  <label className="form-label" for="form3Example3">Confirm New Password</label>
+                                  <label className="form-label" htmlFor="form3Example3">Confirm New Password</label>
 
                                   <input onChange={(e) => setConPass(e.target.value)} type="email" id="form3Example3" autoComplete='off' className="form-control form-control-sm"
                                     placeholder="Retype password" />

@@ -38,7 +38,7 @@ export default function Home() {
 
 
                 <div>
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {
                                 movie?.map((val, index) => {

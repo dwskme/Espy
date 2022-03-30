@@ -68,7 +68,7 @@ const UserRow = (props) => {
 
                                         <form>
                                             <div className="form-outline mb-4">
-                                            <label className="form-label" for="form3Example3">Full Name</label>
+                                            <label className="form-label" htmlFor="form3Example3">Full Name</label>
 
                                             <input value={name} onChange={(e) => setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-sm"
                                             />
@@ -76,15 +76,15 @@ const UserRow = (props) => {
 
                                             <div className='row'>
                                             <div className='form-outline mb-4 col-md-6'>
-                                                <label className="form-label" for="form3Example3">Gender</label>
-                                                <select value = {gender} onChange={(e) => { setGender(e.target.value) }} class="form-select form-select-sm" aria-label="Default select example">
+                                                <label className="form-label" htmlFor="form3Example3">Gender</label>
+                                                <select value = {gender} onChange={(e) => { setGender(e.target.value) }} className="form-select form-select-sm" aria-label="Default select example">
                                                 <option  value="Male">Male</option>
                                                 <option  value="Female">Female</option>
                                                 </select>
                                             </div>
 
                                             <div className="form-outline mb-4 col-md-6">
-                                                <label className="form-label" for="form3Example3">Age</label>
+                                                <label className="form-label" htmlFor="form3Example3">Age</label>
 
                                                 <input value={age} onChange={(e) => setAge(e.target.value)} type="number" id="form3Example3" min='1' className="form-control form-control-sm"
                                                 />
@@ -93,15 +93,15 @@ const UserRow = (props) => {
 
 
                                             <div className="form-outline mb-4">
-                                            <label className="form-label" for="form3Example3">Email address</label>
+                                            <label className="form-label" htmlFor="form3Example3">Email address</label>
 
                                             <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-sm"
                                                 />
                                             </div>
 
                                             <div className="form-outline mb-4">
-                                                <label className="form-label" for="form3Example3">Role</label>
-                                                <select value={role} onChange={(e) => { setRole(e.target.value) }} class="form-select form-select-sm" aria-label="Default select example">
+                                                <label className="form-label" htmlFor="form3Example3">Role</label>
+                                                <select value={role} onChange={(e) => { setRole(e.target.value) }} className="form-select form-select-sm" aria-label="Default select example">
                                                     <option  value="admin">Admin</option>
                                                     <option  value="user">User</option>
                                                 </select>
@@ -117,22 +117,22 @@ const UserRow = (props) => {
                                 </div>
 
                                     <div className='mx-1'>
-                                        <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target={`#${props.index}d`}>
+                                        <button type="button" className="btn btn-sm" data-bs-toggle="modal" data-bs-target={`#${props.index}d`}>
                                         <BsTrash />
                                         </button>
 
-                                        <div class="modal fade" id={`${props.index}d`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Deleting User</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div className="modal fade" id={`${props.index}d`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Deleting User</h5>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div className="modal-body">
                                                 Are  your sure want to remove {props.user.name}?
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
                                                 <button onClick={deleteUser.bind(this,props.user._id)} type="button" className="btn btn-sm btn-danger">Confirm</button>
                                             </div>
                                             </div>

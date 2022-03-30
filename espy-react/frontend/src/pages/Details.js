@@ -133,7 +133,7 @@ const Details = () => {
                                                         </>
                                                         :
                                                         <>
-                                                            <select onChange={(e) => { setRating(e.target.value) }} class="form-select form-select-sm ms-5 me-1" style={{ width: "12ch" }} aria-label="Default select example">
+                                                            <select onChange={(e) => { setRating(e.target.value) }} className="form-select form-select-sm ms-5 me-1" style={{ width: "12ch" }} aria-label="Default select example">
                                                                 <option value="1">1 Star</option>
                                                                 <option value="2">2 Stars</option>
                                                                 <option value="3">3 Stars</option>
