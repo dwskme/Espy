@@ -1,23 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import NavBar from '../components/layout/NavBar';
-import Nav from '../components/layout/SideBar';
 import SideBar from '../components/layout/SideBar';
-import { parseJwt } from '../utils/utils';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { UserContext } from '../utils/userContext';
 
 
 const Profile = () => {
-
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useContext(UserContext);
   const [gender, setGender] = useState(user?.gender);
   const [age, setAge] = useState('');
-
 
   const [oldPassword, setOldPass] = useState();
   const [newPassword, setNewPass] = useState();
@@ -44,9 +38,11 @@ const Profile = () => {
           toast.error(result.data.message, { position: toast.POSITION_TOP_RIGHT })
         }
       })
-    } else {
+    }  else if(conPassword.length()<8){
+      toast.error("Password must be 8 Characters", { position: toast.POSITION_TOP_RIGHT })
+    }else{
+      console.log(conPassword);
       toast.error("Password did not match", { position: toast.POSITION_TOP_RIGHT })
-
     }
   }
 
