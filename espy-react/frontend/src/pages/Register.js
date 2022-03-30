@@ -55,15 +55,16 @@ const Register = () => {
                         </div>
                         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                             <h3 className='my-5'>Register</h3>
+
                             <form>
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" >Full Name</label>
+                                    <label className="form-label" htmlFor="form3Example3">Full Name</label>
                                     <input onChange={(e) => setName(e.target.value)} type="text" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter your name" />
                                 </div>
                                 <div className='row'>
                                     <div className='form-outline mb-4 col-md-6'>
-                                        <label className="form-label" >Gender</label>
+                                        <label className="form-label" htmlFor="form3Example3">Gender</label>
                                         <select onChange={(e) => { setGender(e.target.value) }} className="form-select form-select-lg" aria-label="Default select example">
                                             <option selected value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -71,7 +72,7 @@ const Register = () => {
                                     </div>
 
                                     <div className="form-outline mb-4 col-md-6">
-                                        <label className="form-label" >Age</label>
+                                        <label className="form-label" htmlFor="form3Example3">Age</label>
 
                                         <input onChange={(e) => setAge(e.target.value)} type="number" id="form3Example3" className="form-control form-control-lg"
                                             placeholder="Enter Age" />
@@ -80,7 +81,7 @@ const Register = () => {
 
 
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" >Email address</label>
+                                    <label className="form-label" htmlFor="form3Example3">Email address</label>
                                     <input onChange={(e) => setEmail(e.target.value)} type="email" id="form3Example3" className="form-control form-control-lg"
                                         placeholder="Enter a valid email address" />
                                 </div>

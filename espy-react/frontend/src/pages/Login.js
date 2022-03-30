@@ -8,15 +8,21 @@ import $ from 'jquery'
 
 const Login = () => {
     const navigate = useNavigate();
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
-    // const [remember, setRemember] = useState("");
-
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        //    const remember =  document.getElementById('check').checked;
+        if(  (email.length===0 && (password.length===0) ))
+        {
+            toast.error("Empty Feilds not allowed");
+        }
+        else if (email.length === 0 ){
+            toast.error("Empty Email Feild");
+        }
+        else if (password.length === 0 ){
+            toast.error("Empty Password Feild Feild");
+        }else{}
         axios.post('/api/v1/login', { email, password }).then(function (result) {
             console.log(result.data);
             if (result.data.success) {
@@ -43,7 +49,6 @@ const Login = () => {
 
                             <form>
 
-
                                 <div className="form-outline mb-4">
                                     <label className="form-label" >Email address</label>
 
@@ -57,7 +62,6 @@ const Login = () => {
                                     <input onChange={(e) => setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
                                         placeholder="Enter password" />
                                 </div>
-
                                 {/* <div className="d-flex justify-content-between align-items-center">
                                     <div className="form-check mb-0">
                                         <input className="form-check-input me-2" type="checkbox" value="true" id="check" />
