@@ -156,8 +156,9 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
         res.json({
             success: false, message: "Old password is Incorrect"
         })
-        // return next(new ErrorHandler("Old password is Incorrect", 401));
-    } else {
+        return next(new ErrorHandler("Old password is Incorrect", 401));
+    } 
+    else {
         user.password = req.body.newPassword;
         await user.save();
         sendToken(user, 200, res);
@@ -195,6 +196,16 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+// Delete Profile
+exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+    await user.remove();
+    res.status(200).json({
+        success: true,
+        message: "Account delete Succesfully"
+    });
+});
+
 // Admin Controllers
 
 // Get all Users (Admin)
@@ -211,7 +222,7 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 // Get single Users (Admin)
 exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findByID(req.params.id);
+    const user = await User.findById(req.params.id);
 
     if (!user) {
         return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
