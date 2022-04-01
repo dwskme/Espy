@@ -6,7 +6,7 @@ import NavBar from '../../components/layout/NavBar';
 import {BsSearch} from 'react-icons/bs';
 import UserRow from './UserRow';
 import { UserContext } from '../../utils/userContext';
-
+import Stats from './Stats';
 
 export default function UserManagement() {
 
@@ -82,6 +82,14 @@ export default function UserManagement() {
                             </tbody>
                         </table>
                         </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>
+                            Shows
+                        </h4>
+                        <div>
+                            <Stats> </Stats>
                         </div>
                     </div>
                 </div>

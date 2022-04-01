@@ -1,6 +1,7 @@
 const Movies = require('../models/movieModel');
 const User = require("../models/userModel");
-
+const ErrorHandler = require("../utils/errorhandler");
+const catchAsyncErrors = require("../middleware/catchAsyncError");
 
 // Create Movies -- only for admin
 
@@ -41,10 +42,14 @@ exports.addToWatchList = async (req, res, next) => {
 }
 
 // Get All Movies
-exports.getAllMovies = (req, res) => {
+exports.getAllMovies = catchAsyncErrors(async (req, res, next) => {
+    const movies = await Movies.find();
+    res.status(200).json({
+        success: true,
+        movies,
+    });
+});
 
-    res.status(200).json({ message: "Get all movies" });
-}
 
 
 // Update Route -- only for admin
