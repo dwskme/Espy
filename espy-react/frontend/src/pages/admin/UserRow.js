@@ -22,7 +22,7 @@ const UserRow = (props) => {
             console.log(result.data);
             if(result.data.success){
                 toast.success("User Updated", {position: toast.POSITION_TOP_RIGHT});
-                navigate('/user-management');
+                navigate('/admin');
             }
         })
     }
@@ -34,7 +34,7 @@ const UserRow = (props) => {
                 console.log(result.data);
                 if(result.data.success){
                     toast.success("User Deleted", {position: toast.POSITION_TOP_RIGHT});
-                    navigate('/user-management');
+                    navigate('/admin');
                 }
             })
         }else{

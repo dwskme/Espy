@@ -86,6 +86,7 @@ exports.rateMovie = async (req, res, next) => {
 
     const movie = req.body.movie;
     const rating = req.body.rating;
+    const type = req.body.type;
     var movies = req.user.ratedList;
     var watchList = req.user.watchList;
     
@@ -99,7 +100,7 @@ exports.rateMovie = async (req, res, next) => {
 
     const movieR = Movies.findOne({id: movie.id}).then(function(result){
         if(!result){
-            const newMovie = Movies.create({id:movie.id, rating_count: 1})
+            const newMovie = Movies.create({id:movie.id, rating_count: 1, type: type})
             
         }else{
           var count = result.rating_count;

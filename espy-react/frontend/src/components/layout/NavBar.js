@@ -7,7 +7,6 @@ import '../../styles/style.css';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../utils/userContext';
 
-
 const NavBar = () => {
 
     const [user, setUser] = useContext(UserContext);
@@ -15,9 +14,11 @@ const NavBar = () => {
     const [search, setSearch] = useState();
 
     const searchMovies = (query) => {
+
         axios.get(SEARCH_MULTI_URL + query).then(function (result) {
             setSearch(result.data.results.slice(0, 5));
             $('.search-seg-box').addClass('py-2 px-2 border');
+            console.log(result.data)
         });
     }
 
@@ -67,7 +68,7 @@ const NavBar = () => {
                     {
                         search?.map((val, index) => {
                             return (
-                                <SearchCard id={val.id} name={val.name} title={val.title} img={val.poster_path}></SearchCard>
+                                <SearchCard type={val.media_type} id={val.id} name={val.name} title={val.title} img={val.poster_path}></SearchCard>
                             )
                         })
                     }

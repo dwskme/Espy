@@ -41,7 +41,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     // checking if user has given password and email both
     if (!email || !password) {
         return next(new ErrorHandler("Empty Feilds ", 400), 
-        res.json({ success: false, message: "Empty Feilds." }));
+        );
     }
 
     const user = await User.findOne({
@@ -50,14 +50,14 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
     if (!user) {
         return next(new ErrorHandler("Invalid email or password", 401), 
-        res.json({ success: false, message: "Invalid email or password" }));
+        );
     }
 
 
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Invalid email or password", 401), 
-        res.json({ success: false, message: "Invalid email or password" }));
+        );
     }
     sendToken(user, 200, res);
 });
@@ -198,6 +198,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Delete Profile
 exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
+    
     const user = await User.findById(req.user.id);
     await user.remove();
     res.status(200).json({

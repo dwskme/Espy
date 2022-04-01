@@ -16,11 +16,11 @@ export default function Home() {
         axios.get(POPULAR_MOVIE_URL).then(function (result) {
             // console.log(result.data.results);
             setMovie(result.data.results);
-        }).finally(() => setLoading(false), console.log(movie));
+        }).finally(() => setLoading(false));
         axios.get(POPULAR_SHOWS_URL).then(function (result) {
             console.log(result.data.results);
             setShows(result.data.results);
-        }).finally(() => setLoading(false), console.log(movie));
+        }).finally(() => setLoading(false));
     }, []);
 
     $('.carousel-item').eq(7).addClass('active')
@@ -66,8 +66,8 @@ export default function Home() {
                         {
                             isLoading ? <>Loading...</> :
                                 <>
-                                    <Trending type={'Movies'} data={movie}></Trending>
-                                    <Trending type={'Shows'} data={shows}></Trending>
+                                    <Trending type={'movies'} data={movie}></Trending>
+                                    <Trending type={'shows'} data={shows}></Trending>
                                 </>
                         }
                     </div>

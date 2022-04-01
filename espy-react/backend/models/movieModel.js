@@ -10,6 +10,9 @@ const movieSchema = new mongoose.Schema({
     rating_count:{
         type:Number,
         required:true
+    },
+    type: {
+        type:String
     }
 
 })

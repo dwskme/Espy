@@ -18,7 +18,7 @@ const MovieCard = (props) => {
 
     return (
         <>
-            <Link to={`/details/${props.id}`}>
+            <Link to={`/details/${props.type}/${props.id}`}>
                 <div className='movie-card' id={props.id} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} style={{ position: "relative", width: "27ch" }}>
                     <div className='' >
                         <img className='img img-fluid' style={{ objectFit: "cover", borderRadius: '20px' }} src={props.img} alt="poster" />

@@ -15,7 +15,7 @@ const Trending = (props) => {
                                 return (
                                     <div className='col-md-3'>
                                         <div className="flex flex-wrap m-4">
-                                            {<Card id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>}
+                                            {<Card type={props.type} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>}
                                         </div>
                                     </div>
                                 )

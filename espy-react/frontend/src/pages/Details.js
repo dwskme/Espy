@@ -9,7 +9,8 @@ import { SEARCH_MULTI_URL } from '../config';
 
 const Details = () => {
     const id = useParams().id
-
+    const type = useParams().type
+    console.log(type)
     const [user, setUser] = useContext(UserContext)
     const [rating, setRating] = useState('1');
     const [rate, setRate] = useState();
@@ -30,7 +31,9 @@ const Details = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
+        const movieRoute = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+        const tvRoute = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
+        axios.get(type === 'movie' || type === 'movies'? movieRoute: tvRoute)
             .then(function (result) {setData(result.data);})        
     }, [])
 
@@ -53,8 +56,7 @@ const Details = () => {
     }
 
     const rateMovie = (movie) => {
-        axios.put(`/api/v1/rate`, { movie, rating }).then(function (result) {
-            console.log(result.data.message)
+        axios.put(`/api/v1/rate`, { movie, rating, type: type }).then(function (result) {
             if (result.data.success) {
                 toast.success(result.data.message, { position: toast.POSITION.TOP_RIGHT });
                 axios.get("/api/v1/me").then(function (result) {
