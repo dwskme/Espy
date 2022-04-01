@@ -11,12 +11,15 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('/api/v1/login', { email, password }).then(function (result) {
-            console.log(result.data);
-            if (result.data.success) {
+            if (result.data.success && result.data.user?.role == "admin") {
                 localStorage.setItem('token', result.data.token);
                 toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
+                window.location.href = '/admin';
+            }else if(result.data.success && result.data.user?.role == "user"){
+                toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
                 window.location.href = '/';
-            } else {
+            }
+            else {
                 toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
             }
         });
