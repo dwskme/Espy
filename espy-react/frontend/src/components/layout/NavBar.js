@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { SEARCH_BASE_URL, SEARCH_MULTI_URL } from '../../config';
+import {SEARCH_MULTI_URL } from '../../config';
 import SearchCard from './SearchCard';
 import $ from 'jquery';
 import '../../styles/style.css';
@@ -50,12 +50,10 @@ const NavBar = () => {
 
                 <div className="dropdown me-5">
                     <a href="#" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2" />
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="" width="32" height="32" className="rounded-circle me-2" />
                         <strong>{user?.name}</strong>
                     </a>
                     <ul className="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        {/* <li><a className="dropdown-item" href="#">New project...</a></li> */}
-                        {/* <li><a className="dropdown-item" href="#">Settings</a></li> */}
                         <li><a className="dropdown-item" href="/profile">Profile</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><button onClick={logout} className="dropdown-item" href="#">Sign out</button></li>
@@ -67,7 +65,8 @@ const NavBar = () => {
                     {
                         search?.map((val, index) => {
                             return (
-                                <SearchCard type={val.media_type} id={val.id} name={val.name} title={val.title} img={val.poster_path}></SearchCard>
+                                <SearchCard type={val.media_type} id={val.id} name={val.name} title={val.title} img={val.poster_path}>
+                                </SearchCard>
                             )
                         })
                     }
