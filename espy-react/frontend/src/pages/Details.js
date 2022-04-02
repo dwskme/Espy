@@ -5,25 +5,28 @@ import { API_KEY } from '../config';
 import { toast } from 'react-toastify';
 import { UserContext } from '../utils/userContext';
 import NavBar from '../components/layout/NavBar';
-import { SEARCH_MULTI_URL } from '../config';
+import Card from '../components/layout/Card';
+
 
 const Details = () => {
     const id = useParams().id
     const type = useParams().type
-    console.log(type)
     const [user, setUser] = useContext(UserContext)
     const [rating, setRating] = useState('1');
     const [rate, setRate] = useState();
     const watchList = user?.watchList;
     const ratedList = user?.ratedList;
     const [data, setData] = useState();
+    const [similar, setSimilar] = useState();
+    const [similarRec, setSimilarRec] = useState();
+
+
 
 
     function checkRated(movieId) {
         for (var i = 0; i < ratedList?.length; i++) {
             if (ratedList[i]?.movie.id === parseInt(movieId)) {
                 setRate(ratedList[i]?.rating);
-                console.log("Rating " + ratedList[i]?.rating)
                 return ratedList[i]?.rating;
             }
         }
@@ -33,8 +36,8 @@ const Details = () => {
     useEffect(() => {
         const movieRoute = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
         const tvRoute = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
-        axios.get(type === 'movie' || type === 'movies'? movieRoute: tvRoute)
-            .then(function (result) {setData(result.data);})        
+        axios.get(type === 'movie' || type === 'movies' ? movieRoute : tvRoute)
+            .then(function (result) { setData(result.data); })
     }, [])
 
 
@@ -70,7 +73,6 @@ const Details = () => {
 
     const remove = (movieId) => {
         axios.put(`/api/v1/remove-from-watch-list/${movieId}`).then(function (result) {
-            console.log(result.data)
             if (result.data.success) {
                 toast.success(result.data.message, { position: toast.POSITION.TOP_RIGHT });
                 axios.get("/api/v1/me").then(function (result) {
@@ -90,13 +92,26 @@ const Details = () => {
         }
         return false;
     }
+
+    useEffect(() => {
+        const movieRoute = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}`
+        const tvRoute = `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${API_KEY}`
+
+        axios.get(type === 'movie' || type === 'movies' ? movieRoute : tvRoute)
+            .then(function (result) { setSimilar(result.data.results); })
+
+        // from recommendation similar
+        // axios.get('your route')
+        //     .then(function (result) { setSimilarRec(result.data); })
+    }, [])
+
+    console.log(similar)
     return (
         <>
             <NavBar></NavBar>
             <div className='container-fluid p-0'>
-                <div className='d-flex align-items-center backdrop-div' 
-                style={{ height: "80vh", backgroundImage: `url('http://image.tmdb.org/t/p/w1280/${data?.backdrop_path}')`, backgroundPosition: 'center', backgroundSize: "cover" }}>
-                    {console.log(data)}
+                <div className='d-flex align-items-center backdrop-div'
+                    style={{ height: "80vh", backgroundImage: `url('http://image.tmdb.org/t/p/w1280/${data?.backdrop_path}')`, backgroundPosition: 'center', backgroundSize: "cover" }}>
                     <div className=''>
                         <div className='container desc-info d-flex text-light py-5 px-4 mx-auto col-10'>
                             <img className='img img-thumbnail' src={`http://image.tmdb.org/t/p/w342/${data?.poster_path}`} alt="poster" />
@@ -187,7 +202,35 @@ const Details = () => {
                     </div>
                 </div>
             </div>
-            <h3 className='mx-5 mt-4'>Similar Movies</h3>
+            <div className='px-5'>
+                <h3 className='mx-5 mt-4'>Similar {type == "movies" ? "Movies" : "Shows"}</h3>
+            </div>
+            <div className='container-fluid'>
+                <div className='row container mx-auto col-10'>
+                    {
+                        similarRec ? similarRec.map((val, index) => {
+                            return (
+                                <div className='col-md-3 my-3'>
+                                    <div className="mx-autobg-dark">
+                                        <Card type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                    </div>
+                                </div>
+                            )
+                        })
+                            :
+                            similar?.map((val, index) => {
+                                return (
+                                    <div className='col-md-3 my-3'>
+                                        <div className="mx-autobg-dark">
+                                            <Card type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                    }
+
+                </div>
+            </div>
         </>
     )
 }
