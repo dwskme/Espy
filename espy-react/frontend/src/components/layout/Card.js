@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../styles/card.css';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 const MovieCard = (props) => {
 
     const handleMouseOver = () => {
@@ -18,7 +17,7 @@ const MovieCard = (props) => {
 
     return (
         <>
-            <Link to={`/details/${props.type}/${props.id}`}>
+            <a href={`/details/${props.type}/${props.id}`}>
                 <div className='movie-card' id={props.id} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} style={{ position: "relative", width: "27ch" }}>
                     <div className='' >
                         <img className='img img-fluid' style={{ objectFit: "cover", borderRadius: '20px' }} src={props.img} alt="poster" />
@@ -27,8 +26,8 @@ const MovieCard = (props) => {
                     </div>
                     <div className='info-box d-flex align-items-center'>
                         <div>
-                            <p className='m-0 text-light mx-2 fw-bold'>{props.title}</p>
-                            <p className='m-0 text-light mx-2 fw-bold'>{props.name}</p>
+                            <p className='m-0 text-light mx-2 fw-bold'>{props?.title}</p>
+                            <p className='m-0 text-light mx-2 fw-bold'>{props?.name}</p>
                             <p className='m-0 text-light mx-2'>Rating: {props.rating}⭐</p>
                             {
                                 props.userRating !== undefined ?
@@ -40,7 +39,7 @@ const MovieCard = (props) => {
                         </div>
                     </div>
                 </div>
-            </Link>
+            </a>
         </>
     )
 }
