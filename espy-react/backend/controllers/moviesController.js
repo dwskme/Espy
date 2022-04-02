@@ -43,7 +43,7 @@ exports.addToWatchList = async (req, res, next) => {
 
 // Get All Movies
 exports.getAllMovies = catchAsyncErrors(async (req, res, next) => {
-    const movies = await Movies.find();
+    const movies = await Movies.find().sort({ 'rating_count': -1 });
     res.status(200).json({
         success: true,
         movies,
@@ -94,7 +94,7 @@ exports.rateMovie = async (req, res, next) => {
     const type = req.body.type;
     var movies = req.user.ratedList;
     var watchList = req.user.watchList;
-    
+
     // checking if movie already exists in the array
     movies.push({ movie: movie, rating: rating })
     const user = await User.findByIdAndUpdate(req.user.id, { ratedList: movies }, {
@@ -103,14 +103,14 @@ exports.rateMovie = async (req, res, next) => {
         useFindAndModify: false,
     });
 
-    const movieR = Movies.findOne({id: movie.id}).then(function(result){
-        if(!result){
-            const newMovie = Movies.create({id:movie.id, rating_count: 1, type: type})
-            
-        }else{
-          var count = result.rating_count;
-          count = count+ 1;
-          Movies.findOneAndUpdate({id: result.id}, {rating_count: count})
+    const movieR = Movies.findOne({ id: movie.id }).then(function (result) {
+        if (!result) {
+            const newMovie = Movies.create({ id: movie.id, rating_count: 1, type: type })
+
+        } else {
+            var count = result.rating_count;
+            count = count + 1;
+            Movies.findOneAndUpdate({ id: result.id }, { rating_count: count })
         }
     })
 
