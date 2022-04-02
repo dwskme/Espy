@@ -1,8 +1,12 @@
-.sidebar {
+.sid {
   position: sticky;
   top: 0;
   left: 0;
   height: 100vh;
   /* background-color: aquamarine; */
   z-index: 999;
+}
+
+.sid-active {
+  display: block;
 }

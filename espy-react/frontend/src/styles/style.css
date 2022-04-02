@@ -1,3 +1,7 @@
+* {
+  color: rgb(99, 99, 99);
+}
+
 .info {
   background: rgba(20, 20, 20, 0.7);
   border-radius: 10px;
@@ -29,7 +33,6 @@
 }
 
 .desc-info {
-  background-color: rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 3px;
   backdrop-filter: blur(4px);
@@ -40,4 +43,8 @@
 
 nav {
   border-bottom: 1px solid rgb(153, 153, 153);
+}
+
+.custom-active {
+  border-left: 8px solid rgb(75, 75, 255) !important;
 }
