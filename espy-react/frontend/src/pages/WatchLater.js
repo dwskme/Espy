@@ -21,14 +21,12 @@ const WatchLater = () => {
 
 
 
-                <div>
-                    <div className='container px-5'>
-                        {
-                            <>
-                                <WatchList type={'My Lists'} data={watchList}></WatchList>
-                            </>
-                        }
-                    </div>
+                <div className='container-fluid'>
+                    {
+                        <>
+                            <WatchList type={'My Lists'} data={watchList}></WatchList>
+                        </>
+                    }
 
                 </div>
 

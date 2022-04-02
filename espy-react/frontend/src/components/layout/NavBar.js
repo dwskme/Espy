@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import {SEARCH_MULTI_URL } from '../../config';
+import { SEARCH_MULTI_URL } from '../../config';
 import SearchCard from './SearchCard';
 import $ from 'jquery';
 import '../../styles/style.css';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../utils/userContext';
-
+import { FaBars } from 'react-icons/fa'
 const NavBar = () => {
 
     const [user, setUser] = useContext(UserContext);
@@ -37,8 +37,11 @@ const NavBar = () => {
 
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light" style={{ background: "#a8a8a8" }}>
             <a href="/" className='navbar-brand fw-bold px-4 text-muted' style={{ fontSize: "2em" }}>Espy</a>
+            <button className='btn d-md-none d-sm-block me-auto' onClick={() => $('.nav-wrapper').toggle(function () { $('.nav-wrapper').addClass('sid-active') }, function () { $('.nav-wrapper').removeClass('sid-active') })}>
+                <FaBars></FaBars>
+            </button>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

@@ -20,14 +20,13 @@ const RatedMovies = () => {
                 <div className='nav-wrapper'>
                     <SideBar tab='rated'></SideBar>
                 </div>
-                <div>
-                    <div className='container px-5'>
-                        {
-                            <>
-                                <RatedList type={'Your Ratings'} data={ratedList}></RatedList>
-                            </>
-                        }
-                    </div>
+                <div className='container-fluid'>
+                    {
+                        <>
+                            <RatedList type={'Your Ratings'} data={ratedList}></RatedList>
+                        </>
+                    }
+
                 </div>
             </div>
         </>

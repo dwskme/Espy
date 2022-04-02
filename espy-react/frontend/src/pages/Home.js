@@ -34,7 +34,7 @@ export default function Home() {
 
 
 
-                <div>
+                <div className='mx-auto container-fluid text-light'>
                     <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {
@@ -44,8 +44,8 @@ export default function Home() {
                                             <img style={{ height: "65ch", width: "100%", objectFit: "cover" }} src={`http://image.tmdb.org/t/p/w1280/${val?.backdrop_path}`} alt="Poster-Image" />
                                             <div className='carousel-caption d-block'>
                                                 <div className='info px-3 py-3'>
-                                                    <p className='fw-bold' style={{ fontSize: "3em" }}>{val.title}</p>
-                                                    <p className='' style={{ fontSize: "1.2em" }}>{val.overview}</p>
+                                                    <p className='fw-bold text-light' style={{ fontSize: "3em" }}>{val.title}</p>
+                                                    <p className='text-light' style={{ fontSize: "1.2em" }}>{val.overview}</p>
                                                 </div>
                                             </div>
                                         </div>

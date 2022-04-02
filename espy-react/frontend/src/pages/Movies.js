@@ -31,34 +31,30 @@ export default function Movies() {
                 <div className='nav-wrapper'>
                     <SideBar tab='movies'></SideBar>
                 </div>
-                <div>
-                    <div className='container px-5'>
-                        {
-                            isLoading ? <>Loading...</> :
-                                <div className='py-2'>
-                                    <section className="text-gray-600 body-font">
-                                        <div className="container px-5 pb-12  mx-auto">
-                                            <div className="flex flex-col text-center w-full mb-20">
-                                                <h1 className="">Popular Choice of the Day.</h1>
-                                            </div>
-                                            <div className='row container mx-auto'>
-                                                {
-                                                    movie?.map((val, index) => {
-                                                        return (
-                                                            <div className='col-md-3'>
-                                                                <div className="flex flex-wrap m-4">
-                                                                    <Card id={val.id} name={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                    </section>
+                <div className='container-fluid'>
+                    {
+                        isLoading ? <>Loading...</> :
+                            <div className='py-2 container-fluid'>
+                                <div className="container px-5 pb-12 mx-auto p-0">
+                                    <div className="flex flex-col text-center w-full mb-20">
+                                        <h1 className="">Popular Choice of the Day.</h1>
+                                    </div>
+                                    <div className='row'>
+                                        {
+                                            movie?.map((val, index) => {
+                                                return (
+                                                    <div className='col-md-3'>
+                                                        <div className="flex flex-wrap m-4">
+                                                            <Card type={"movies"} id={val.id} name={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
-                        }
-                    </div>
+                            </div>
+                    }
 
                 </div>
 
