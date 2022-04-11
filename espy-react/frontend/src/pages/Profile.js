@@ -38,12 +38,19 @@ const Profile = () => {
           toast.error(result.data.message, { position: toast.POSITION_TOP_RIGHT })
         }
       })
-    }  else if(conPassword.length()<8){
+    } else if (conPassword.length() < 8) {
       toast.error("Password must be 8 Characters", { position: toast.POSITION_TOP_RIGHT })
-    }else{
+    } else {
       console.log(conPassword);
       toast.error("Password did not match", { position: toast.POSITION_TOP_RIGHT })
     }
+  }
+
+  const deleteAccount = () => {
+    axios.delete('/api/v1/me/delete').then(function () {
+      localStorage.clear();
+      window.location.href = '/';
+    })
   }
 
   return (
@@ -122,6 +129,7 @@ const Profile = () => {
                       <button type="button" className="btn btn-sm btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#passwordForm">
                         Change Password
                       </button>
+                      <button className='btn btn-sm btn-outline-danger' type='button' data-bs-toggle="modal" data-bs-target="#deleteModal">Remove Account</button>
 
                       <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
@@ -220,8 +228,26 @@ const Profile = () => {
                           </div>
                         </div>
                       </div>
+
+                      {/* Delete account */}
+                      <div className="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5 className="modal-title" id="exampleModalLabel">Remove Account</h5>
+                              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                              <p>Are you sure want to remove your account?</p>
+                            </div>
+                            <div className="modal-footer">
+                              <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button onClick={deleteAccount} type="button" className="btn btn-sm btn-danger">Confirm</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    {/* Update Password */}
                   </div>
                 </div>
 

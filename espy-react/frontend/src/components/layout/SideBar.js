@@ -18,42 +18,42 @@ const Nav = (props) => {
             </a> */}
             <ul className="nav nav-pills flex-column mb-auto">
                 <li className="my-2 p-0">
-                    <a id='home' href={'/'} className="nav-link">
+                    <a id='home' href={'/'} className="nav-link text-secondary">
                         <span><FaHome /> Home</span>
                     </a>
                 </li>
                 <li className='my-2'>
-                    <a id='rated' href={"/rated-movies"} className="nav-link">
+                    <a id='rated' href={"/rated-movies"} className="nav-link text-secondary">
                         <span><AiFillLike /> My Ratings</span>
 
                     </a>
                 </li>
                 <li className='my-2'>
-                    <a id="later" href={"/watch-later"} className="nav-link">
+                    <a id="later" href={"/watch-later"} className="nav-link text-secondary">
                         <span><FaSave /> Watch Later</span>
                     </a>
                 </li>
                 <li className='my-2'>
-                    <a id='movies' href={'/movies'} className="nav-link">
+                    <a id='movies' href={'/movies'} className="nav-link text-secondary">
                         <span><FaFilm /> Movies</span>
                     </a>
                 </li>
                 <li className='my-2'>
-                    <a id="shows" href={'/shows'} className="nav-link">
+                    <a id="shows" href={'/shows'} className="nav-link text-secondary">
 
                         <span><FaTv /> Shows</span>
 
                     </a>
                 </li>
                 <li className='my-2'>
-                    <a href="#" className="nav-link">
+                    <a href="#" className="nav-link text-secondary">
 
                         <span><FaBook /> Books</span>
 
                     </a>
                 </li>
             </ul>
-            
+
         </div>
     )
 }

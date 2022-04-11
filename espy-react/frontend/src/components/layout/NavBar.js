@@ -6,7 +6,7 @@ import $ from 'jquery';
 import '../../styles/style.css';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../utils/userContext';
-import { FaBars } from 'react-icons/fa'
+import { FaBars, FaSearch } from 'react-icons/fa'
 const NavBar = () => {
 
     const [user, setUser] = useContext(UserContext);
@@ -26,7 +26,6 @@ const NavBar = () => {
         axios.get('/api/v1/logout').then(function (result) {
             console.log(result.data.success);
             if (result.data.success === true) {
-                console.log("data")
                 localStorage.clear();
                 toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT });
                 window.location.href = "/"
@@ -37,7 +36,7 @@ const NavBar = () => {
 
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light" style={{ background: "#a8a8a8" }}>
+        <nav style={{ borderBottom: "3px solid #ff2a12" }} className="navbar navbar-expand-lg navbar-light">
             <a href="/" className='navbar-brand fw-bold px-4 text-muted' style={{ fontSize: "2em" }}>Espy</a>
             <button className='btn d-md-none d-sm-block me-auto' onClick={() => $('.nav-wrapper').toggle(function () { $('.nav-wrapper').addClass('sid-active') }, function () { $('.nav-wrapper').removeClass('sid-active') })}>
                 <FaBars></FaBars>
@@ -48,7 +47,10 @@ const NavBar = () => {
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <form className="form-inline my-2 my-lg-0 d-flex ms-auto mx-3">
-                    <input onChange={(e) => searchMovies(e.target.value)} className="form-control mr-sm-2 mx-1" type="search" placeholder="Search" aria-label="Search" />
+                    <div className='d-flex border rounded'>
+                        <input onChange={(e) => searchMovies(e.target.value)} style={{ border: "none" }} className="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search" />
+                        <FaSearch className='my-auto me-3 text-muted'></FaSearch>
+                    </div>
                 </form>
 
                 <div className="dropdown me-5">

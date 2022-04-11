@@ -6,7 +6,7 @@ const Trending = (props) => {
         <div className='py-2'>
             <div className="container-fluid">
                 <div className="flex flex-col w-full mb-20 mt-3">
-                    <h1 className="">Trending {props.type}</h1>
+                    <h1 className="text-secondary">Trending {props.type}</h1>
                 </div>
                 <div className='row'>
                     {

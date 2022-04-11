@@ -1,16 +1,40 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { POPULAR_MOVIE_URL, POPULAR_SHOWS_URL } from '../config';
 import SideBar from '../components/layout/SideBar';
 import $ from 'jquery';
 import Trending from '../components/layout/Trending';
 import NavBar from '../components/layout/NavBar';
+import { UserContext } from '../utils/userContext';
 
 export default function Home() {
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
     const [isLoading, setLoading] = useState(false)
+    const [rec, setRec] = useState([])
+
+
+    const [user, setUser] = useContext(UserContext);
+    const ratedList = user?.ratedList;
+    console.log(ratedList)
+    useEffect(() => {
+        if (ratedList) {
+            var data = []
+            for (var i = 0; i < ratedList.length; i++) {
+                var title = ratedList[i].movie.title ? ratedList[i].movie.title : ratedList[i].movie.name
+                var rating = ratedList[i].rating
+                data.push({ "title": title, "rating": rating })
+            }
+
+            console.log(data)
+            axios.get('http://127.0.0.1:5000/user', { data: JSON.stringify(data) }).then(function (result) {
+                console.log(result.data)
+            })
+        }
+    }, [])
+
+
     useEffect(() => {
         setLoading(true);
         axios.get(POPULAR_MOVIE_URL).then(function (result) {

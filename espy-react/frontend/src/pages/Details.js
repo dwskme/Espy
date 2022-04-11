@@ -18,7 +18,8 @@ const Details = () => {
     const ratedList = user?.ratedList;
     const [data, setData] = useState();
     const [similar, setSimilar] = useState();
-    const [similarRec, setSimilarRec] = useState();
+    const [similarRec, setSimilarRec] = useState([]);
+    const [lolrec, setLolrec] = useState()
 
 
 
@@ -94,18 +95,35 @@ const Details = () => {
     }
 
     useEffect(() => {
-        const movieRoute = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}`
-        const tvRoute = `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${API_KEY}`
 
-        axios.get(type === 'movie' || type === 'movies' ? movieRoute : tvRoute)
-            .then(function (result) { setSimilar(result.data.results); })
+        axios.get(`http://127.0.0.1:5000/similar/${id}`)
+            .then(function (result) {
+                var AIdata = result.data
+                console.log(result.data)
 
-        // from recommendation similar
-        // axios.get('your route')
-        //     .then(function (result) { setSimilarRec(result.data); })
+                // If data from AI in not generated
+                if (result.data.length === 0) {
+                    console.log("here")
+                    const movieRoute = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}`
+                    const tvRoute = `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${API_KEY}`
+
+                    axios.get(type === 'movie' || type === 'movies' ? movieRoute : tvRoute)
+                        .then(function (result) { setSimilar(result.data.results); })
+                } else { //GEtting data from AI
+                    const movieRoute = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+                    const tvRoute = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
+
+                    for (var i = 0; i < AIdata.length; i++) {
+                        axios.get(type === 'movie' || type === 'movies' ? `https://api.themoviedb.org/3/movie/${AIdata[i]}?api_key=${API_KEY}` : `https://api.themoviedb.org/3/tv/${AIdata[i]}?api_key=${API_KEY}`)
+                            .then(function (result) {
+                                console.log(result.data)
+                                setSimilarRec((list) => [...list, result.data]);
+                            })
+                    }
+                }
+            })
     }, [])
 
-    console.log(similar)
     return (
         <>
             <NavBar></NavBar>
@@ -115,7 +133,7 @@ const Details = () => {
                     <div className=''>
                         <div className='container desc-info d-flex text-light py-5 px-4 mx-auto col-10'>
                             <img className='img img-thumbnail' src={`http://image.tmdb.org/t/p/w342/${data?.poster_path}`} alt="poster" />
-                            <div>
+                            <div className='text-light'>
                                 <div className='d-flex align-items-center'>
                                     {
                                         data == null ?
@@ -203,26 +221,30 @@ const Details = () => {
                 </div>
             </div>
             <div className='px-5'>
-                <h3 className='mx-5 mt-4'>Similar {type == "movies" ? "Movies" : "Shows"}</h3>
+                <div className='container col-3 mb-4'>
+                    <h2 className='text-center mt-4 fw-bold text-secondary'>Similar {type == "movies" ? "Movies" : "Shows"} {similarRec.length > 0 ? "Generated form AI" : ""}</h2>
+                    <div className='mx-auto' style={{ height: "4px", width: "50%", backgroundColor: "#ff2a12" }}></div>
+                </div>
             </div>
             <div className='container-fluid'>
                 <div className='row container mx-auto col-10'>
                     {
-                        similarRec ? similarRec.map((val, index) => {
+                        similarRec.length > 0 ? similarRec.map((val, index) => {
                             return (
-                                <div className='col-md-3 my-3'>
-                                    <div className="mx-autobg-dark">
-                                        <Card type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                <div key={index} className='col-md-3 my-3'>
+                                    <div key={index + 1} className="mx-autobg-dark">
+                                        <Card key={index + 2} type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
                                     </div>
                                 </div>
                             )
                         })
+
                             :
                             similar?.map((val, index) => {
                                 return (
-                                    <div className='col-md-3 my-3'>
-                                        <div className="mx-autobg-dark">
-                                            <Card type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                    <div key={index} className='col-md-3 my-3'>
+                                        <div key={index + 1} className="mx-autobg-dark">
+                                            <Card key={index + 1} type={"movies"} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
                                         </div>
                                     </div>
                                 )
