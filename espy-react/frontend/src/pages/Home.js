@@ -12,7 +12,6 @@ export default function Home() {
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
     const [isLoading, setLoading] = useState(false)
-    const [rec, setRec] = useState([])
 
 
     const [user, setUser] = useContext(UserContext);

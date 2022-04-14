@@ -19,7 +19,6 @@ const Details = () => {
     const [data, setData] = useState();
     const [similar, setSimilar] = useState();
     const [similarRec, setSimilarRec] = useState([]);
-    const [lolrec, setLolrec] = useState()
 
 
 
