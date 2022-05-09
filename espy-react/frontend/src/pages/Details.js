@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { UserContext } from '../utils/userContext';
 import NavBar from '../components/layout/NavBar';
 import Card from '../components/layout/Card';
+import $ from 'jquery'
+import { FaStar } from "react-icons/fa";
 
 
 const Details = () => {
@@ -19,8 +21,15 @@ const Details = () => {
     const [data, setData] = useState();
     const [similar, setSimilar] = useState();
     const [similarRec, setSimilarRec] = useState([]);
+    const [lolrec, setLolrec] = useState()
 
-
+    const starRate = (val) => {
+        $('.star').removeClass('text-warning')
+        for (var i = 0; i < val; i++) {
+            $('.star').eq(i).addClass('text-warning')
+            setRating(val)
+        }
+    }
 
 
     function checkRated(movieId) {
@@ -38,7 +47,7 @@ const Details = () => {
         const tvRoute = `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}`
         axios.get(type === 'movie' || type === 'movies' ? movieRoute : tvRoute)
             .then(function (result) { setData(result.data); })
-    }, [])
+    }, [id])
 
 
     useEffect(() => {
@@ -46,7 +55,7 @@ const Details = () => {
     })
 
     const watchLater = (movie) => {
-        axios.put(`/api/v1/add-to-watch-list`, { movie }).then(function (result) {
+        axios.put(`/api/v1/add-to-watch-list`, { movie, type: type }).then(function (result) {
             if (result.data.success) {
                 toast.success(result.data.message, { position: toast.POSITION.TOP_RIGHT });
                 axios.get("/api/v1/me").then(function (result) {
@@ -64,6 +73,19 @@ const Details = () => {
                 toast.success(result.data.message, { position: toast.POSITION.TOP_RIGHT });
                 axios.get("/api/v1/me").then(function (result) {
                     setUser(result.data.user)
+                })
+            } else {
+                toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
+            }
+        })
+    }
+    const removeRating = (movie) => {
+        axios.put(`/api/v1/remove-rating`, { movie }).then(function (result) {
+            if (result.data.success) {
+                toast.success(result.data.message, { position: toast.POSITION.TOP_RIGHT });
+                axios.get("/api/v1/me").then(function (result) {
+                    setUser(result.data.user)
+                    setRate()
                 })
             } else {
                 toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
@@ -121,7 +143,12 @@ const Details = () => {
                     }
                 }
             })
-    }, [])
+    }, [id])
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+        setSimilarRec([])
+    }, [id])
 
     return (
         <>
@@ -162,16 +189,28 @@ const Details = () => {
                                                     rate !== undefined ?
                                                         <>
                                                             <p className='my-1'>Your Rating: {rate}⭐</p>
+                                                            <button onClick={removeRating.bind(this, data)} type="button" className="btn btn-sm btn-danger me-2" data-bs-toggle="modal" data-bs-target="#rateCard">
+                                                                Remove Rating
+                                                            </button>
                                                         </>
                                                         :
                                                         <>
-                                                            <select onChange={(e) => { setRating(e.target.value) }} className="form-select form-select-sm ms-5 me-1" style={{ width: "12ch" }} aria-label="Default select example">
+                                                            <div className='ms-5'>
+                                                                <div>
+                                                                    <span className='mx-1 star' onClick={starRate.bind(this, 1)}><FaStar /></span>
+                                                                    <span className='mx-1 star' onClick={starRate.bind(this, 2)}><FaStar /></span>
+                                                                    <span className='mx-1 star' onClick={starRate.bind(this, 3)}><FaStar /></span>
+                                                                    <span className='mx-1 star' onClick={starRate.bind(this, 4)}><FaStar /></span>
+                                                                    <span className='mx-1 star' onClick={starRate.bind(this, 5)}><FaStar /></span>
+                                                                </div>
+                                                            </div>
+                                                            {/* <select onChange={(e) => { setRating(e.target.value) }} className="form-select form-select-sm ms-5 me-1" style={{ width: "12ch" }} aria-label="Default select example">
                                                                 <option value="1">1 Star</option>
                                                                 <option value="2">2 Stars</option>
                                                                 <option value="3">3 Stars</option>
                                                                 <option value="4">4 Stars</option>
                                                                 <option value="5">5 Stars</option>
-                                                            </select>
+                                                            </select> */}
 
                                                             {
                                                                 data !== null ?
@@ -182,7 +221,6 @@ const Details = () => {
                                                                     <button type="button" className="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#rateCard">
                                                                         Loading...
                                                                     </button>
-
                                                             }
                                                         </>
                                                 }

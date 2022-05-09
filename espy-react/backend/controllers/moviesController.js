@@ -1,5 +1,6 @@
 const Movies = require('../models/movieModel');
 const User = require("../models/userModel");
+const WatchList = require('../models/addedToWatchList')
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncError");
 
@@ -8,6 +9,8 @@ const catchAsyncErrors = require("../middleware/catchAsyncError");
 exports.addToWatchList = async (req, res, next) => {
 
     const movie = req.body.movie;
+    const type = req.body.type;
+
     var movies = req.user.watchList
     // checking if movie already exists in the array
     function checkMovie(movieId) {
@@ -35,18 +38,37 @@ exports.addToWatchList = async (req, res, next) => {
         useFindAndModify: false,
     });
 
+    // set user in array of added to watch list
+    const watchList = await WatchList.findOne({ id: movie.id }).then(function (result) {
+        if (result) {
+            var users_count = result.users_count
+            users_count = users_count + 1
+            console.log(users_count)
+            WatchList.findOneAndUpdate({ id: movie.id }, { users_count: users_count }).then(function (docs, err) {
+                console.log("Update")
+            })
+        } else {
+            WatchList.create({ id: movie.id, users_count: 1, type: type })
+        }
+    })
+
+
     res.status(201).json({
         success: true,
         message: "Movie add to your watch list"
     })
 }
 
+
 // Get All Movies
 exports.getAllMovies = catchAsyncErrors(async (req, res, next) => {
+
     const movies = await Movies.find().sort({ 'rating_count': -1 });
+    const watchList = await WatchList.find().sort({ users_count: -1 });
     res.status(200).json({
         success: true,
         movies,
+        watchList
     });
 });
 
@@ -105,12 +127,18 @@ exports.rateMovie = async (req, res, next) => {
 
     const movieR = Movies.findOne({ id: movie.id }).then(function (result) {
         if (!result) {
-            const newMovie = Movies.create({ id: movie.id, rating_count: 1, type: type })
-
+            const newMovie = Movies.create({ id: movie.id, rating_count: 1, type: type, averageRating: rating })
         } else {
+            var avg = result.averageRating;
             var count = result.rating_count;
+            avg_rating = (avg * count)
+            avg_rating = avg_rating + parseInt(rating)
             count = count + 1;
-            Movies.findOneAndUpdate({ id: result.id }, { rating_count: count })
+            avg_rating = avg_rating / count
+
+            Movies.findOneAndUpdate({ id: result.id }, { rating_count: count, averageRating: avg_rating }).then(function (docs, err) {
+                console.log("Updated")
+            })
         }
     })
 
@@ -131,3 +159,49 @@ exports.rateMovie = async (req, res, next) => {
         message: "Movie rated"
     })
 }
+
+exports.removeRating = async (req, res, next) => {
+    const movie = req.body.movie;
+    var movies = req.user.ratedList;
+    var rating;
+    // checking if movie already exists in the array
+    for (var i = 0; i < movies.length; i++) {
+        if (movies[i].movie.id == movie.id) {
+            rating = movies[i].rating
+            movies.splice(i, 1)
+        }
+    }
+    const user = await User.findByIdAndUpdate(req.user.id, { ratedList: movies }, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    });
+
+    const movieR = Movies.findOne({ id: movie.id }).then(function (result) {
+        if (!result) {
+            console.log("Not Rated")
+        } else {
+            var avg = result.averageRating;
+            var count = result.rating_count;
+            avg_rating = (avg * count)
+            avg_rating = avg_rating - parseInt(rating)
+            console.log(avg_rating)
+            if (avg_rating === 0) {
+                Movies.findOneAndDelete({ id: result.id }).then(function (docs, err) {
+                    console.log("Updated")
+                })
+            } else {
+                count = count - 1;
+                avg_rating = avg_rating / count
+                console.log(avg_rating)
+                Movies.findOneAndUpdate({ id: result.id }, { rating_count: count, averageRating: avg_rating }).then(function (docs, err) {
+                    console.log("Updated")
+                })
+            }
+        }
+    })
+    res.status(201).json({
+        success: true,
+        message: "Rating Removed"
+    })
+}   

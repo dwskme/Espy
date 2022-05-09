@@ -12,9 +12,9 @@ const Trending = (props) => {
                     {
                         props.data?.splice(0, 4).map((val, index) => {
                             return (
-                                <div className='col-md-3'>
-                                    <div className="flex flex-wrap m-4">
-                                        {<Card type={props.type} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>}
+                                <div key={index} className='col-md-3'>
+                                    <div key={index + 1} className="flex flex-wrap m-4">
+                                        {<Card key={index + 2} type={props.type} id={val.id} name={val.name} title={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>}
                                     </div>
                                 </div>
                             )

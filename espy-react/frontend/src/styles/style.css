@@ -1,5 +1,51 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+* {
+  font-family: poppins !important;
+  font-size: 15px;
+}
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhaWx3aW5kLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBAdGFpbHdpbmQgYmFzZTtcclxuQHRhaWx3aW5kIGNvbXBvbmVudHM7XHJcbkB0YWlsd2luZCB1dGlsaXRpZXM7ICovXHJcbiJdfQ== */
+.info {
+  background: rgba(20, 20, 20, 0.7);
+  border-radius: 10px;
+}
+
+.search-seg-box {
+  width: 30ch;
+  position: absolute;
+  top: 8ch;
+  right: 14ch;
+  z-index: 1;
+  font-size: 0.9em;
+}
+
+.search-image {
+  height: 7ch;
+  width: 5ch;
+  border-radius: 4px;
+}
+
+.item-link {
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.i-link:hover {
+  background: rgb(211, 211, 211);
+  /* color: ; */
+}
+
+.desc-info {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+}
+.desc-info img {
+  height: 40ch;
+}
+
+nav {
+  border-bottom: 1px solid rgb(153, 153, 153);
+}
+
+.custom-active {
+  border-left: 8px solid rgb(75, 75, 255) !important;
+}

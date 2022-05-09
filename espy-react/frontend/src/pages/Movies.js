@@ -45,7 +45,7 @@ export default function Movies() {
                                                 return (
                                                     <div className='col-md-3'>
                                                         <div className="flex flex-wrap m-4">
-                                                            <Card type={"movies"} id={val.id} name={val.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
+                                                            <Card type={"movies"} id={val.id} name={val?.name} title={val?.title} overview={val.overview} rating={val.vote_average} img={`http://image.tmdb.org/t/p/w500/${val?.poster_path}`}></Card>
                                                         </div>
                                                     </div>
                                                 )

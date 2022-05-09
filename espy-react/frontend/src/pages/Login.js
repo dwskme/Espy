@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import  placeholder1  from "../img/placeholder1.png";
+import placeholder1 from "../img/placeholder1.png";
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -11,15 +11,20 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('/api/v1/login', { email, password }).then(function (result) {
-            if (result.data.success && result.data.user?.role == "admin") {
-                localStorage.setItem('token', result.data.token);
-                toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
-                window.location.href = '/admin';
-            }else if(result.data.success && result.data.user?.role == "user"){
-                toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
-                window.location.href = '/';
-            }
-            else {
+            if (result.data.success) {
+                if (result.data.user?.role == "admin") {
+                    localStorage.setItem('token', result.data.token);
+                    toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
+                    window.location.href = '/admin';
+                } else if (result.data.user?.role == "user") {
+                    localStorage.setItem('token', result.data.token);
+                    toast.success("Logged In Successfully", { position: toast.POSITION_TOP_RIGHT })
+                    window.location.href = '/';
+                }
+                else {
+                    toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
+                }
+            } else {
                 toast.error(result.data.message, { position: toast.POSITION.TOP_RIGHT })
             }
         });
@@ -52,15 +57,15 @@ const Login = () => {
                                     <input onChange={(e) => setPassword(e.target.value)} type="password" id="form3Example4" className="form-control form-control-lg"
                                         placeholder="Enter password" />
                                 </div>
-                                {/* <div className="d-flex justify-content-between align-items-center">
-                                    <div className="form-check mb-0">
+                                <div className="d-flex justify-content-between align-items-center">
+                                    {/* <div className="form-check mb-0">
                                         <input className="form-check-input me-2" type="checkbox" value="true" id="check" />
                                         <label className="form-check-label" htmlFor="form2Example3">
                                             Remember me
                                         </label>
-                                    </div>
-                                    <a href="#!" className="text-body">Forgot password?</a>
-                                </div> */}
+                                    </div> */}
+                                    <Link to={"/forgot-password"} className="text-primary">Forgot password?</Link>
+                                </div>
 
                                 <div className="text-center text-lg-start mt-4 pt-2">
                                     <button onClick={handleSubmit} type="button" className="btn btn-primary btn-lg"

@@ -40,7 +40,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
     // checking if user has given password and email both
     if (!email || !password) {
-        return next(new ErrorHandler("Empty Feilds ", 400), 
+        return next(new ErrorHandler("Empty Feilds ", 400),
         );
     }
 
@@ -49,14 +49,14 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     }).select("+password");
 
     if (!user) {
-        return next(new ErrorHandler("Invalid email or password", 401), 
+        return next(new ErrorHandler("Invalid email or password", 401),
         );
     }
 
 
     const isPasswordMatched = await user.comparePassword(password);
     if (!isPasswordMatched) {
-        return next(new ErrorHandler("Invalid email or password", 401), 
+        return next(new ErrorHandler("Invalid email or password", 401),
         );
     }
     sendToken(user, 200, res);
@@ -85,9 +85,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     }
     // Get Reset Token
     const resetToken = user.getResetPasswordToken();
-
     await user.save({ validateBeforeSave: false });
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+    const resetPasswordUrl = `http://localhost:3000/reset-password/${resetToken}`
     const message = `You are receiving this email because you (or someone else) has requested the reset of a password. \n\n ${resetPasswordUrl}\n\n 
     If you have not requested it then ignore it.`;
 
@@ -157,7 +157,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
             success: false, message: "Old password is Incorrect"
         })
         return next(new ErrorHandler("Old password is Incorrect", 401));
-    } 
+    }
     else {
         user.password = req.body.newPassword;
         await user.save();
@@ -198,7 +198,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Delete Profile
 exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
-    
+
     const user = await User.findById(req.user.id);
     await user.remove();
     res.status(200).json({
@@ -211,7 +211,6 @@ exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
 
 // Get all Users (Admin)
 exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
-
 
     const users = await User.find();
 
@@ -237,7 +236,7 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
 // Search single User (Admin)
 exports.searchUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findOne({email: req.params.query});
+    const user = await User.findOne({ email: req.params.query });
 
     if (!user) {
         return next(new ErrorHandler(`No user found with ${req.params.query}`, 404));
@@ -278,7 +277,7 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 
 // Delete User (Admin)
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findOne({_id:req.params.id, role: "user"});
+    const user = await User.findOne({ _id: req.params.id, role: "user" });
     if (!user) {
         return next(new ErrorHandler(`No user found with id ${req.params.id}`, 404));
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../styles/card.css';
 import $ from 'jquery';
+import { Link } from 'react-router-dom'
 const MovieCard = (props) => {
 
     const handleMouseOver = () => {
@@ -17,7 +18,7 @@ const MovieCard = (props) => {
 
     return (
         <>
-            <a href={`/details/${props.name ? "shows" : "movies"}/${props.id}`}>
+            <Link to={`/details/${props.name ? "shows" : "movies"}/${props.id}`}>
                 <div className='movie-card' id={props.id} onMouseOut={handleMouseOut} onMouseOver={handleMouseOver} style={{ position: "relative", width: "27ch" }}>
                     <div className='' >
                         <img className='img img-fluid' style={{ objectFit: "cover", borderRadius: '20px' }} src={props.img} alt="poster" />
@@ -39,7 +40,7 @@ const MovieCard = (props) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         </>
     )
 }

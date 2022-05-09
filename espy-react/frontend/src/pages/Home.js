@@ -7,31 +7,14 @@ import $ from 'jquery';
 import Trending from '../components/layout/Trending';
 import NavBar from '../components/layout/NavBar';
 import { UserContext } from '../utils/userContext';
+import { API_KEY } from '../config';
+import { RecContext } from '../utils/RecContext';
 
 export default function Home() {
     const [movie, setMovie] = useState();
     const [shows, setShows] = useState();
     const [isLoading, setLoading] = useState(false)
-
-
-    const [user, setUser] = useContext(UserContext);
-    const ratedList = user?.ratedList;
-    console.log(ratedList)
-    useEffect(() => {
-        if (ratedList) {
-            var data = []
-            for (var i = 0; i < ratedList.length; i++) {
-                var title = ratedList[i].movie.title ? ratedList[i].movie.title : ratedList[i].movie.name
-                var rating = ratedList[i].rating
-                data.push({ "title": title, "rating": rating })
-            }
-
-            console.log(data)
-            axios.get('http://127.0.0.1:5000/user', { data: JSON.stringify(data) }).then(function (result) {
-                console.log(result.data)
-            })
-        }
-    }, [])
+    const [rec, setRec] = useState([])
 
 
     useEffect(() => {
@@ -41,7 +24,7 @@ export default function Home() {
             setMovie(result.data.results);
         }).finally(() => setLoading(false));
         axios.get(POPULAR_SHOWS_URL).then(function (result) {
-            console.log(result.data.results);
+            // console.log(result.data.results);
             setShows(result.data.results);
         }).finally(() => setLoading(false));
     }, []);
@@ -63,12 +46,12 @@ export default function Home() {
                             {
                                 movie?.map((val, index) => {
                                     return (
-                                        <div className='carousel-item bg-secondary'>
-                                            <img style={{ height: "65ch", width: "100%", objectFit: "cover" }} src={`http://image.tmdb.org/t/p/w1280/${val?.backdrop_path}`} alt="Poster-Image" />
-                                            <div className='carousel-caption d-block'>
-                                                <div className='info px-3 py-3'>
-                                                    <p className='fw-bold text-light' style={{ fontSize: "3em" }}>{val.title}</p>
-                                                    <p className='text-light' style={{ fontSize: "1.2em" }}>{val.overview}</p>
+                                        <div key={index} className='carousel-item bg-secondary'>
+                                            <img key={index + 1} style={{ height: "65ch", width: "100%", objectFit: "cover" }} src={`http://image.tmdb.org/t/p/w1280/${val?.backdrop_path}`} alt="Poster-Image" />
+                                            <div key={index + 2} className='carousel-caption d-block'>
+                                                <div key={index + 3} className='info px-3 py-3'>
+                                                    <p key={index + 4} className='fw-bold text-light' style={{ fontSize: "3em" }}>{val.title}</p>
+                                                    <p key={index + 5} className='text-light' style={{ fontSize: "1.2em" }}>{val.overview}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +77,6 @@ export default function Home() {
                                 </>
                         }
                     </div>
-
                 </div>
 
 
