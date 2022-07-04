@@ -1,10 +1,11 @@
 {
-  "name": "backend-api",
-  "version": "0.1.0",
-  "private": true,
+  "name": "espy-fyp",
+  "version": "1.0.0",
+  "description": "A Movie and Shows Recommendation as well as tracking System.",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "concurrently": "^7.2.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
@@ -16,8 +17,35 @@
     "nodemon": "^2.0.15",
     "validator": "^13.7.0"
   },
-  "scripts": {
-    "start": "node backend/index.js",
-    "dev": "nodemon backend/index.js"
-  }
+   "scripts": {
+    "start": "node backend/index",
+    "server": "nodemon backend/index",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwskme/espy-fyp.git"
+  },
+  "keywords": [
+    "Espy",
+    "Movie",
+    "Recommendation",
+    "Show",
+    "Shows",
+    "Recommendation",
+    "Movie",
+    "Tracker",
+    "SHow",
+    "Tracker"
+  ],
+  "author": "Samir Kc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwskme/espy-fyp/issues"
+  },
+  "homepage": "https://github.com/dwskme/espy-fyp#readme"
 }
